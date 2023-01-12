@@ -1,19 +1,10 @@
 import requests
 from dateutil import parser
-from enum import Enum
+from Models.ZwemwaterNL.Advice import Advice
+from Models.ZwemwaterNL.Tests import Tests
 
 from Models.Area import Area
 from Models.WaterQuality import WaterQuality
-
-
-class Tests(Enum):
-    E_COLI = "E.Coli"
-    INTTNLETRCCN = "Intestinale enterokokken"
-
-
-class Advice(Enum):
-    Safe = "Veilig"
-    Unsafe = "Onveilig"
 
 
 class ZwemwaterNL:

@@ -12,8 +12,8 @@ app = FastAPI()
 @app.get("/")
 async def main():
     data = []
-    data.append(MarineTerrein.retrieve())
-    data.append(ZwemwaterNL.retrieve())
+    data.append(MarineTerrein().retrieve())
+    data.append(ZwemwaterNL().retrieve("1458"))
 
     return {
         "Version": version,

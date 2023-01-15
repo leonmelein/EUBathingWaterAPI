@@ -1,18 +1,17 @@
-from fastapi import FastAPI
-from datetime import datetime
-
 import os
-import uvicorn
-from Models.Response import Response
 
+from fastapi import FastAPI
+import uvicorn
+
+from Models.Response import Response
 from Sources.Marineterrein import MarineTerrein
 from Sources.ZwemwaterNL import ZwemwaterNL
 
-version = os.getenv("version") if os.getenv("version") else 1.0
+version = os.getenv("version") if os.getenv("version") else "1.0"
 app = FastAPI(
     title="Zwemwater API",
     description="Toegang tot de actuele metingen van zwemplekken in Nederland",
-    version=version
+    version= version
 )
 
 
@@ -20,7 +19,8 @@ app = FastAPI(
 async def main():
     data = []
     data.append(MarineTerrein().retrieve())
-    data.append(ZwemwaterNL().retrieve("1458"))
+    data.append(ZwemwaterNL().retrieve(location="1458"))
+    data.append(ZwemwaterNL().retrieve(location="1022"))
     return Response(version, data)
 
 

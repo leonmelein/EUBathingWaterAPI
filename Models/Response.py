@@ -4,7 +4,8 @@ from Models.Area import Area
 
 
 class Response():
-    def __init__(self, version: float, data: List[Area]):
+
+    def __init__(self, version: str, data: List[Area]):
         self.Version = version
         self.LastUpdated = datetime.now().isoformat()
         self.Data = data

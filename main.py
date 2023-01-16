@@ -17,9 +17,8 @@ app = FastAPI(
 
 @app.get("/", summary="Get all Locations", description="Get all locations", tags=["GetLocations"])
 async def main():
-    data = []
-    data.append(MarineTerrein().retrieve())
-    data.append(ZwemwaterNL().retrieve(location="6102791"))
+    data = [MarineTerrein().retrieve(), 
+            ZwemwaterNL().retrieve(location="6102791")]
     return Response(version, data)
 
 

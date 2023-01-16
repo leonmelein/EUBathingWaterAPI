@@ -8,8 +8,29 @@ from Models.WaterQuality import WaterQuality
 
 
 class ZwemwaterNL:
+    server = 'https://pubgeo.zwemwater.nl/geoserver/zwr_public/wfs'
+
+    def info(self, location="1458"):
+        body = f"""
+        <GetFeature xmlns="http://www.opengis.net/wfs" service="WFS" version="1.1.0" outputFormat="application/json" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <Query typeName="zwr_public:zwemplekken_details" srsName="EPSG:28992" xmlns:zwr_public="https://pubgeo.zwemwater.nl/geoserver/zwr_public">
+                    <Filter xmlns="http://www.opengis.net/ogc">
+                        <PropertyIsEqualTo>
+                            <PropertyName>zwemwaterlocatie_id</PropertyName>
+                            <Literal>{location}</Literal>
+                        </PropertyIsEqualTo>
+                    </Filter>
+                </Query>
+            </GetFeature>
+        """
+        response = requests.post(self.server, body)
+        details = response.json()['features'][0]['properties']
+        naam, rating = details['naam'], details['status']
+        return (naam, rating)
+
     def retrieve(self, location="1458"):
-        server = 'https://pubgeo.zwemwater.nl/geoserver/zwr_public/wfs'
+        name, rating = self.info(location)
+
         body = f"""
             <GetFeature xmlns="http://www.opengis.net/wfs" service="WFS" version="1.1.0" outputFormat="application/json" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <Query typeName="zwr_public:resultaatsen" srsName="EPSG:28992" xmlns:zwr_public="https://pubgeo.zwemwater.nl/geoserver/zwr_public">
@@ -23,7 +44,7 @@ class ZwemwaterNL:
             </GetFeature>
         """
 
-        response = requests.post(server, body)
+        response = requests.post(self.server, body)
         data = [item['properties'] for item in response.json()['features']]
 
         status = []
@@ -36,7 +57,7 @@ class ZwemwaterNL:
             # print(Tests[measurement_type].value, value, is_safe)
             status.append(is_safe)
 
-        returnItem = Area(name="Sloterplas Strand", quality=WaterQuality.Bad)
+        returnItem = Area(name=name, quality=WaterQuality.Bad)
         if Advice.Unsafe not in status:
             returnItem.quality = WaterQuality.Good
         return returnItem
@@ -50,3 +71,6 @@ class ZwemwaterNL:
         if value < type_limit[item]:
             return Advice.Safe
         return Advice.Unsafe
+
+if __name__ == "__main__":
+    ZwemwaterNL().info()

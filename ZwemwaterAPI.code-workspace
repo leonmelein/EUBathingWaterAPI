@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+    ],
+    "settings": {
+        "explorer.excludeGitIgnore": true,
+        "files.exclude": {
+            "**/.idea": true
+        }
+    }
+}

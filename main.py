@@ -19,8 +19,7 @@ app = FastAPI(
 async def main():
     data = []
     data.append(MarineTerrein().retrieve())
-    data.append(ZwemwaterNL().retrieve(location="1458"))
-    data.append(ZwemwaterNL().retrieve(location="1022"))
+    data.append(ZwemwaterNL().retrieve(location="6102791"))
     return Response(version, data)
 
 

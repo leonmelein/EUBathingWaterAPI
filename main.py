@@ -17,9 +17,21 @@ app = FastAPI(
 
 @app.get("/", summary="Get all Locations", description="Get all locations", tags=["GetLocations"])
 async def main():
-    data = []
-    data.append(MarineTerrein().retrieve())
-    data.append(ZwemwaterNL().retrieve(location="6102791"))
+    locations = ["1092", "1093", "1153", "1158",
+                 "304872", "5934676", "6102791", "7179850"]
+    data = [
+        MarineTerrein().retrieve(),            
+    ]
+
+    ZwClient = ZwemwaterNL()
+    for location in locations:
+        print(location)
+        try:
+            data.append(ZwClient.retrieve(location=location))
+        except:
+            print(location, "failed")
+        
+    data = sorted(data, key=lambda x: x.name)
     return Response(version, data)
 
 

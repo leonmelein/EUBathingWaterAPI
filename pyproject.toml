@@ -1,0 +1,17 @@
+[project]
+name = "ZwemwaterAPI"
+version = "0.1"
+description = "Huidige status van alle Nederlandse zwemwateren"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  {email = "leon@leonmelein.nl", name = "Léon Melein"}
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python"
+]
+dependencies = [
+
+
+]

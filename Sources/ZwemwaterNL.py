@@ -9,7 +9,9 @@ from Models.WaterQuality import WaterQuality
 
 class ZwemwaterNL:
     server = 'https://pubgeo.zwemwater.nl/geoserver/zwr_public/wfs'
-
+    locations = ["1092", "1093", "1153", "1158",
+                "304872", "5934676", "6102791", "7179850"]
+                
     def info(self, location="1458"):
         body = f"""
         <GetFeature xmlns="http://www.opengis.net/wfs" service="WFS" version="1.1.0" outputFormat="application/json" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">

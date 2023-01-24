@@ -1,10 +1,10 @@
 import requests
 from dateutil import parser
-from Models.ZwemwaterNL.Advice import Advice
-from Models.ZwemwaterNL.Tests import Tests
+from models.ZwemwaterNL.Advice import Advice
+from models.ZwemwaterNL.Tests import Tests
 
-from Models.Area import Area
-from Models.WaterQuality import WaterQuality
+from models.Area import Area
+from models.WaterQuality import WaterQuality
 
 
 class ZwemwaterNL:

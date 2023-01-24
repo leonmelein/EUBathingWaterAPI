@@ -3,9 +3,9 @@ import os
 from fastapi import FastAPI
 import uvicorn
 
-from Models.Response import Response
-from Sources.Marineterrein import MarineTerrein
-from Sources.ZwemwaterNL import ZwemwaterNL
+from models.Response import Response
+from sources.Marineterrein import MarineTerrein
+from sources.ZwemwaterNL import ZwemwaterNL
 
 version = os.getenv("version") if os.getenv("version") else "1.0"
 app = FastAPI(

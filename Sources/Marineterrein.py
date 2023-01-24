@@ -1,6 +1,6 @@
 import requests
-from Models.Area import Area
-from Models.WaterQuality import WaterQuality
+from models.Area import Area
+from models.WaterQuality import WaterQuality
 
 
 class MarineTerrein:

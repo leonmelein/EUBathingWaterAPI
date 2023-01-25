@@ -17,7 +17,9 @@ app = FastAPI(
 
 @app.get("/", summary="Get all Locations", description="Get all locations", tags=["GetLocations"])
 async def main():
-    
+    locations = ["1092", "1093", "1153", "1158",
+                 "304872", "5934676", "6102791", "7179850"]
+                 
     data = [
         MarineTerrein().retrieve()           
     ]

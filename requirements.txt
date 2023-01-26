@@ -71,7 +71,7 @@ tzlocal==4.2
 ujson==5.7.0
 urllib3==1.26.14
 uvicorn==0.20.0
-uvloop==0.17.0
+uvloop==0.17.0; sys_platform == 'darwin'
 watchfiles==0.18.1
 wcwidth==0.2.6
 websockets==10.4

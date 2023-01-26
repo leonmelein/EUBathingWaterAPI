@@ -8,7 +8,7 @@
             "name": "Python: FastAPI",
             "type": "python",
             "request": "launch",
-            "module": "uvicorn",
+            "module": "hypercorn",
             "args": [
                 "main:app"
             ],

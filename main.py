@@ -14,10 +14,8 @@ origins = [
     "http://localhost",
     "http://localhost:8080",
     "http://localhost:3000",
+    "http://localhost:6006"
 ]
-
-
-
 
 version = os.getenv("version") if os.getenv("version") else "1.0"
 app = FastAPI(

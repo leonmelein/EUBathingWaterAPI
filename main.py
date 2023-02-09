@@ -6,16 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 import uvicorn
 
-origins = [
-    "http://leonmelein.nl",
-    "https://leonmelein.nl",
-    "http://swim.leonmelein.nl",
-    "https://swim.leonmelein.nl",
-    "http://localhost",
-    "http://localhost:8080",
-    "http://localhost:3000",
-    "http://localhost:6006"
-]
+origins = ["*"]
 
 version = os.getenv("version") if os.getenv("version") else "1.0"
 app = FastAPI(

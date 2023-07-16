@@ -34,9 +34,9 @@ async def on_shutdown():
 
 @app.get("/", summary="Get all Locations", description="Get all locations", tags=["GetLocations"])
 async def main():
-    query = "SELECT * FROM measurements"
+    query = "SELECT * FROM locations"
     rows = await database.fetch_all(query=query)
-    rows = sorted(rows, key=lambda x: x.naam)
+    rows = sorted(rows, key=lambda x: x.name)
     return rows
 
 if __name__ == '__main__':

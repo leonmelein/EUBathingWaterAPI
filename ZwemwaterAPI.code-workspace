@@ -4,10 +4,6 @@
             "path": ".",
             "name": "API"
         },
-        {
-            "path": "../ZwemwaterSPA/",
-            "name": "App"
-        }
     ],
     "settings": {
         "explorer.excludeGitIgnore": true,

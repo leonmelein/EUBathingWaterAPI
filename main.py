@@ -4,6 +4,8 @@ from databases import Database
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from geojson import Feature, Point, FeatureCollection
+
 import uvicorn
 
 origins = ["*"]
@@ -34,9 +36,15 @@ async def on_shutdown():
 
 @app.get("/", summary="Get all Locations", description="Get all locations", tags=["GetLocations"])
 async def main():
+    collection = []
+
     query = "SELECT * FROM locations"
     rows = await database.fetch_all(query=query)
-    rows = sorted(rows, key=lambda x: x.name)
+    for row in rows:
+        collection.append(
+            Feature(geometry=Point(row[2], row[3]), id=row[0], properties={"name": row[1]}) 
+        )
+    print(collection)
     return rows
 
 if __name__ == '__main__':

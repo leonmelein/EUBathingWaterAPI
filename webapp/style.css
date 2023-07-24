@@ -1,0 +1,62 @@
+body { margin:0; padding:0; }
+/* #map { 
+    width: 100%; 
+    height:100%; 
+    position: absolute 
+} */
+
+.mapboxgl-map {
+    position: unset;
+    height: 80vh;
+}
+
+.mapboxgl-ctrl-top-right {
+    position: relative;
+}
+
+.mapboxgl-ctrl-bottom-right {
+    position: relative;
+    bottom: -71vh;
+    right: unset;
+}
+
+.popup-content {
+  display: inline-block
+}
+
+#title {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+* {
+    font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+.pin-icon {
+  font-size: 20px;
+  color: blue
+}
+
+.vl {
+  border-left: 1px solid #bababa;
+  height: 15px;
+  padding: 0px;
+  margin: 10px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "map map list";
+}
+
+.map {
+    grid-area: map;
+}
+
+.list {
+    grid-area: list;
+}

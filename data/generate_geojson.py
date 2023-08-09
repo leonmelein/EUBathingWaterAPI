@@ -1,8 +1,6 @@
 from geojson import Feature, Point, FeatureCollection, dump
 import sqlite3
 
-import geojson
-
 db = sqlite3.connect("data/dataset.sqlite3")
 
 cur = db.cursor()

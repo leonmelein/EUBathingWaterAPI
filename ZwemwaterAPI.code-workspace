@@ -1,9 +1,8 @@
 {
-	"folders": [
-		{
-            "path": ".",
-            "name": "API"
-        },
+    "folders": [
+        {
+            "path": "."
+        }
     ],
     "settings": {
         "explorer.excludeGitIgnore": true,

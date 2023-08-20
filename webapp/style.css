@@ -5,49 +5,23 @@ body { margin:0; padding:0; }
     position: absolute 
 } */
 
-.mapboxgl-map {
-    position: unset;
+.maplibregl-map {
     height: 80vh;
-}
-
-.mapboxgl-ctrl-top-right {
-    position: relative;
-}
-
-.mapboxgl-ctrl-bottom-right {
-    position: relative;
-    bottom: -71vh;
-    right: unset;
-}
-
-.popup-content {
-  display: inline-block
 }
 
 #title {
   padding-left: 1em;
   padding-right: 1em;
-}
+    }
 
 * {
     font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
-.pin-icon {
-  font-size: 20px;
-  color: blue
-}
-
-.vl {
-  border-left: 1px solid #bababa;
-  height: 15px;
-  padding: 0px;
-  margin: 10px;
 }
 
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr; 
     gap: 0px 0px;
     grid-template-areas:
         "map map list";
@@ -55,8 +29,45 @@ body { margin:0; padding:0; }
 
 .map {
     grid-area: map;
+    border-radius: 1rem;
+    margin-left: 1rem;
 }
 
 .list {
     grid-area: list;
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+    > input {
+        width: 100%;
+        padding:1rem;
+        border-radius: 0.5rem;
+    }
+
+    > ul {
+        list-style-type: none;
+        padding-left: 0;
+
+        > li {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background-color: #eeeeee;
+            border-radius: 0.5rem;
+        }
+    }
+}
+
+.copyright {
+    margin: 1rem;
+    text-align: center;
+
+    > a {
+        text-decoration: none;
+    }
+}
+
+em {
+   font-weight: bold;
+   font-style: normal; 
+   color: #4A90E2;
 }

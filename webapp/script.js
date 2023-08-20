@@ -1,19 +1,18 @@
-mapboxgl.accessToken =
-  "pk.eyJ1IjoidGhlc29jaWFsbGlvbnMiLCJhIjoiY2xqdnJyeWZuMHI5bzNmbnZ4YWFzMG8zZiJ9.UxvouECcaKRYO2quoReT6g";
+// mapboxgl.accessToken =
+//   "pk.eyJ1IjoidGhlc29jaWFsbGlvbnMiLCJhIjoiY2xqdnJyeWZuMHI5bzNmbnZ4YWFzMG8zZiJ9.UxvouECcaKRYO2quoReT6g";
 
-this.map = new mapboxgl.Map({
+this.map = new maplibregl.Map({
   container: "map", // container id
-  style: "mapbox://styles/mapbox/streets-v9",
-  center: [5.3835819, 52.1556708], // starting position
-  zoom: 7 // starting zoom
+    style: "http://127.0.0.1:5500/webapp/mapstyle.json",
+    center: [13.404954, 52.520008], // starting position
+  zoom: 3 // starting zoom
 });
 
 // Add zoom and rotation controls to the map.
-var nav = new mapboxgl.NavigationControl();
+var nav = new maplibregl.NavigationControl();
 map.addControl(nav, "top-right");
 
 map.on("load", function () {
-    map.resize()
     map.addSource("swimming", {
         type: "geojson",
         // Use a URL for the value for the `data` property.
@@ -27,8 +26,18 @@ map.on("load", function () {
         source: "swimming",
         paint: {
         "circle-radius": 5,
-        "circle-color": "#ff0000"
+        "circle-color": "#5390E9"
         }
     });
+    map.resize()
+
+    map.addControl(
+        new maplibregl.GeolocateControl({
+            positionOptions: {
+                enableHighAccuracy: true
+            },
+            trackUserLocation: true
+        })
+    )
 });
 

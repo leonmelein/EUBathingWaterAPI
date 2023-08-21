@@ -27,10 +27,26 @@ body { margin:0; padding:0; }
         "map map list";
 }
 
+@media screen and (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: "map"
+                             "list";
+    }
+
+    .maplibregl-map {
+        height: 50vh;
+    }
+
+}
+
 .map {
     grid-area: map;
     border-radius: 1rem;
     margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
 }
 
 .list {

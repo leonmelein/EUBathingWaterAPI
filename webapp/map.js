@@ -1,6 +1,6 @@
 var map = new maplibregl.Map({
   container: "map", // container id
-    style: "http://127.0.0.1:5500/webapp/bright.json",
+    style: "/webapp/bright.json",
     center: [13.404954, 52.520008], // starting position
   zoom: 3 // starting zoom
 });
@@ -14,7 +14,7 @@ map.on("load", function () {
         type: "geojson",
         // Use a URL for the value for the `data` property.
         data:
-        "http://127.0.0.1:5500/locations.geojson"
+        "/locations.geojson"
     });
 
     map.addLayer({

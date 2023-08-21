@@ -1,4 +1,4 @@
-import { sortByDistance } from "./sort.js"; 
+import { getDistance } from "./sort.js"; 
 
 let countries;
 let search_term = '';
@@ -7,7 +7,7 @@ const search_input = document.getElementById('search');
 
 const fetchCountries = async () => {
     countries = await fetch(
-        'http://localhost:5500/locations.geojson'
+        '/locations.geojson'
     ).then(res => res.json());
 };
 
@@ -18,9 +18,16 @@ const showCountries = async () => {
     // getting the data
     await fetchCountries();
     let data = countries['features']
-    sortByDistance(data, 4.836666, 52.3641429)
+    const lat = 52.3641429
+    const lon = 4.836666
 
-    var items = data.filter(item =>
+    let sortedData = data.sort((a, b) => {
+        const distanceToA = getDistance(lat, lon, a.geometry.coordinates[1], a.geometry.coordinates[0]);
+        const distanceToB = getDistance(lat, lon, b.geometry.coordinates[1], b.geometry.coordinates[0]);
+        return distanceToA - distanceToB;
+    })
+
+    var items = sortedData.filter(item =>
         item.properties.name.toLowerCase().includes(search_term.toLowerCase())
     )
 

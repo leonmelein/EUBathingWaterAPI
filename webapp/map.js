@@ -1,9 +1,6 @@
-// mapboxgl.accessToken =
-//   "pk.eyJ1IjoidGhlc29jaWFsbGlvbnMiLCJhIjoiY2xqdnJyeWZuMHI5bzNmbnZ4YWFzMG8zZiJ9.UxvouECcaKRYO2quoReT6g";
-
-this.map = new maplibregl.Map({
+var map = new maplibregl.Map({
   container: "map", // container id
-    style: "http://127.0.0.1:5500/webapp/mapstyle.json",
+    style: "http://127.0.0.1:5500/webapp/bright.json",
     center: [13.404954, 52.520008], // starting position
   zoom: 3 // starting zoom
 });
@@ -17,7 +14,7 @@ map.on("load", function () {
         type: "geojson",
         // Use a URL for the value for the `data` property.
         data:
-        "http://127.0.0.1:8000/"
+        "http://127.0.0.1:5500/locations.geojson"
     });
 
     map.addLayer({

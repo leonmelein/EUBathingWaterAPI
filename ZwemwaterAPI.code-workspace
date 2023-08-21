@@ -9,5 +9,27 @@
         "files.exclude": {
             "**/.idea": true
         }
+    },
+    "launch": {
+        "configurations": [
+            {
+                "type": "chrome",
+                "name": "http://localhost:5500/webapp/",
+                "request": "launch",
+                "url": "http://localhost:5500/webapp/"
+            },
+            {
+                "type": "chrome",
+                "name": "https://localhost:5500/webapp",
+                "request": "launch",
+                "url": "https://localhost:5500/webapp"
+            },
+            {
+                "type": "chrome",
+                "name": "http://localhost:5500/webapp",
+                "request": "launch",
+                "url": "http://localhost:5500/webapp"
+            }
+        ]
     }
 }

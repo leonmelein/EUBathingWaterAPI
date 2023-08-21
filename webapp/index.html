@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="nl" translate="no">
 <head>
     <meta charset='utf-8' />
     <title>Swimspots</title>
@@ -15,18 +15,11 @@
     <div class="container">
         <div class="map" id="map">
         </div>
-        <div class="list">
-            <input type="search" placeholder="Zoek zwemplek...">
-            <ul>
-                <li>Sloterplas</li>
-                <li>Marineterrein</li>
-                <li>Grote Speelvijver, Amsterdamse Bos</li>
-                <li>Sloterplas</li>
-                <li>Marineterrein</li>
-                <li>Grote Speelvijver, Amsterdamse Bos</li>
-                <li>Sloterplas</li>
-                <li>Marineterrein</li>
-                <li>Grote Speelvijver, Amsterdamse Bos</li>
+        <div class="list" id="list">
+            <input type="search" placeholder="Zoek zwemplek..." id="search">
+            <ul id="resultlist">
+                <script type="module" src="./sort.js"></script>
+                <script type="module" src="./search.js"></script>
             </ul>
         </div>
     </div>
@@ -35,6 +28,6 @@
             <em>Léon Melein</em>
         </a>
     </div>
-    <script src="./script.js"></script>
+    <script src="./map.js"></script>
 </body>
 </html>

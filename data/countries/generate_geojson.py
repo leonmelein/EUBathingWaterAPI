@@ -7,6 +7,7 @@ cur = db.cursor()
 results = cur.execute("SELECT * FROM locations").fetchall()
 
 collection = []
+
 for result in results:
     feature = Feature(id=result[0],
                       geometry=Point((result[4], result[3])),
@@ -17,5 +18,6 @@ for result in results:
     collection.append(feature)
 
 data = FeatureCollection(collection)
-with open("locs.geojson", "w") as f:
-    dump(data, f)
+with open("locations.geojson", "w", encoding="utf8") as f:
+    dump(data, f, ensure_ascii=False)
+

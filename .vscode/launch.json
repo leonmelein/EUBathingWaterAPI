@@ -5,15 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: FastAPI",
-            "type": "python",
+            "type": "chrome",
             "request": "launch",
-            "module": "hypercorn",
-            "args": [
-                "main:app"
-            ],
-            "jinja": true,
-            "justMyCode": true
+            "name": "Webapp",
+            "url": "http://localhost:5500/webapp"
         }
     ]
 }

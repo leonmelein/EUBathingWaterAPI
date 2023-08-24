@@ -9,25 +9,24 @@
     <link href="style.css" rel="stylesheet"/>
 </head>
 <body>
-  <div id='title'>
-    <h1>Swimspots.eu</h1>
-  </div>
-    <div class="container">
-        <div class="map" id="map">
+    <div class="page_container">
+        <div id='title'>
+            <h1>Swimspots.eu</h1>
         </div>
-        <div class="list" id="list">
-            <input type="search" placeholder="Zoek zwemplek..." id="search">
-            <ul id="resultlist">
-                <script type="module" src="./sort.js"></script>
-                <script type="module" src="./search.js"></script>
-            </ul>
+        <div id="mapcontent">
+            <div class="container">
+                <div class="map" id="map">
+                    <script src="./map.js"></script>
+                </div>
+                <div class="list" id="list">
+                    <input type="search" placeholder="Zoek zwemplek..." id="search">
+                    <ul id="resultlist">
+                        <script type="module" src="./sort.js"></script>
+                        <script type="module" src="./search.js"></script>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="copyright">
-        <a href="https://www.leonmelein.nl">
-            <em>Léon Melein</em>
-        </a>
-    </div>
-    <script src="./map.js"></script>
 </body>
 </html>

@@ -69,7 +69,7 @@ typing_extensions==4.7.1
 tzdata==2023.3
 tzlocal==5.0.1
 ujson==5.8.0
-urllib3==2.0.3
+urllib3==2.0.6
 uvicorn==0.23.0
 uvloop==0.17.0; sys_platform == 'darwin'
 watchfiles==0.20.0

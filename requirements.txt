@@ -18,7 +18,7 @@ entrypoints==0.4
 executing==2.0.0
 fastapi==0.103.2
 fonttools==4.43.1
-geojson==2.5.0
+geojson==3.0.1
 googlemaps==4.10.0
 h11==0.14.0
 httptools==0.6.1

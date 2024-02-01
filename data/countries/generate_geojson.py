@@ -10,7 +10,7 @@ collection = []
 
 for result in results:
     feature = Feature(id=result[0],
-                      geometry=Point((result[4], result[3])),
+                      geometry=Point((result[3], result[4])),
                       properties={
         "name": result[1],
         "alternate_name": result[2]

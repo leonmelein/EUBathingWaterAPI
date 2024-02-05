@@ -16,7 +16,7 @@ debugpy==1.8.0
 decorator==5.1.1
 entrypoints==0.4
 executing==2.0.0
-fastapi==0.103.2
+fastapi==0.109.1
 fonttools==4.43.1
 geojson==3.0.1
 googlemaps==4.10.0

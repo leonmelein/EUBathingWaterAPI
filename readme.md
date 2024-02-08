@@ -30,7 +30,5 @@ Supplemental data is currently only provided for The Netherlands. This includes:
 | 🇳🇱 NL | Location | Sloterplas, Amsterdam | Former designated swimming spot. On the road to recovery.  |
 | 🇳🇱 NL | Water temperature | Meetnet Water | Estimation of current water temperature based on closest open water  |
 
-
-
 ## Contribute
 Want to add a data source? Feel free to submit a pull request!

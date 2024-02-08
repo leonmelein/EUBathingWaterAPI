@@ -1,7 +1,7 @@
 from geojson import Feature, Point, FeatureCollection, dump
 import sqlite3
 
-db = sqlite3.connect("data/countries/dataset.sqlite3")
+db = sqlite3.connect("data/dataset.sqlite3")
 
 cur = db.cursor()
 results = cur.execute("SELECT * FROM locations").fetchall()

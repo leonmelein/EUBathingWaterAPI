@@ -3,6 +3,5 @@ __pycache__/
 .DS_Store
 .ipynb_checkpoints/
 .ssl/
-locations.geojson
 data/countries/dataset.sqlite3
 env/

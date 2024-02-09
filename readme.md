@@ -31,4 +31,4 @@ Supplemental data is currently only provided for The Netherlands. This includes:
 | 🇳🇱 NL | Water temperature | Meetnet Water | Estimation of current water temperature based on closest open water  |
 
 ## Contribute
-Want to add a data source? Feel free to submit a pull request!
+Want to add a data source? Feel free to submit [a pull request](https://github.com/leonmelein/EUBathingWaterAPI/compare)!

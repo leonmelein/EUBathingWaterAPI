@@ -5,3 +5,4 @@ __pycache__/
 .ssl/
 data/countries/dataset.sqlite3
 env/
+.zed/

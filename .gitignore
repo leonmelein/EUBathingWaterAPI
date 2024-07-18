@@ -6,3 +6,4 @@ __pycache__/
 data/countries/dataset.sqlite3
 env/
 .zed/
+airflow/

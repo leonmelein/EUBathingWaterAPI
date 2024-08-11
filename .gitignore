@@ -1,9 +1,0 @@
-__pycache__/
-.venv/
-.DS_Store
-.ipynb_checkpoints/
-.ssl/
-data/countries/dataset.sqlite3
-env/
-.zed/
-airflow/

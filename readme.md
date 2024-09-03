@@ -1,3 +1,5 @@
+![EU Bathing Water API](docs/.attachments/EUBathingWaterAPI.png =250x250)
+
 # EU Bathing Water API
 _Where to safely swim in open water in Europe?_
 

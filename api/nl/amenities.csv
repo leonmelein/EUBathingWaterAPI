@@ -1,41 +1,41 @@
 voorziening_type_id,omschrijving,groep
-5943913,Parkeergelegenheid,ONBEPERKT
 5943900,EHBO,ONBEPERKT
+5943913,Parkeergelegenheid,ONBEPERKT
 5943906,Horeca,ONBEPERKT
 5943894,Blauwe vlag,ONBEPERKT
 5943901,Entreeheffing,ONBEPERKT
-5943892,Afvalbakken,HYGIENE
-5943929,Zandstrand,RECREATIE
-5943915,Speeltoestellen,RECREATIE
-5943911,Ligweide,RECREATIE
-5943926,Voorzieningen voor invaliden,GENERIEK
-5943916,Speelweide,RECREATIE
-5943917,Strandhuis,RECREATIE
 5943905,Honden toegestaan,ONBEPERKT
-5943930,Zoet water,GENERIEK
-5943907,Infobord,GENERIEK
-5943902,Fietsenstalling,GENERIEK
-5943932,Zwemzone afgebakend,VEILIGHEID
-5943898,Drijflijn,VEILIGHEID
-5943893,Bereikbaar met OV,GENERIEK
-5943921,Toegankelijk voor invaliden,GENERIEK
 5943914,Reddingsbrigade,ONBEPERKT
 5943922,Toezicht categorie C,ONBEPERKT
-5943895,Diepte zwemlocatie,VEILIGHEID
-5943890,Afdrijvingsgevaar,VEILIGHEID
-5943891,Aflopende bodem,VEILIGHEID
-5943925,Uitkijkpost,ONBEPERKT
 5943924,Trailerhelling,ONBEPERKT
+5943925,Uitkijkpost,ONBEPERKT
 5943920,Teken aanwezig,ONBEPERKT
+5943902,Fietsenstalling,GENERIEK
 5943927,WC / Toiletten,HYGIENE
+5943907,Infobord,GENERIEK
+5943930,Zoet water,GENERIEK
+5943898,Drijflijn,VEILIGHEID
+5943929,Zandstrand,RECREATIE
+5943892,Afvalbakken,HYGIENE
+5943911,Ligweide,RECREATIE
+5943932,Zwemzone afgebakend,VEILIGHEID
 5943910,Kleedruimte,RECREATIE
+5943915,Speeltoestellen,RECREATIE
 5943896,Doorzicht,VEILIGHEID
+5943916,Speelweide,RECREATIE
+5943891,Aflopende bodem,VEILIGHEID
 5943897,Douches,HYGIENE
+5943893,Bereikbaar met OV,GENERIEK
+5943895,Diepte zwemlocatie,VEILIGHEID
+5943917,Strandhuis,RECREATIE
 5943919,Surf mogelijkheden,RECREATIE
 5943912,Naaktstrand,RECREATIE
 5943904,Grootte,GENERIEK
+5943921,Toegankelijk voor invaliden,GENERIEK
+5943926,Voorzieningen voor invaliden,GENERIEK
 5943903,Getijdewater,VEILIGHEID
 5943931,Zout water,GENERIEK
+5943890,Afdrijvingsgevaar,VEILIGHEID
 5943899,Duiktoren,RECREATIE
 5943909,Kitesurf mogelijkheden,RECREATIE
 5943923,Toezicht categorie D,VEILIGHEID

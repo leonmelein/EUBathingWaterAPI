@@ -4,4 +4,7 @@ ipykernel
 PyArrow
 geopandas
 owslib
-ipyleaflet
+geojson
+tqdm
+colorama
+humanize

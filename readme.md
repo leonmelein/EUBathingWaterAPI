@@ -1,4 +1,4 @@
-# EU Bathing Water API
+# <img src="/docs/.attachments/EUBathingWaterAPI.png" title="EU Bathing Water API" width="32px" height="32px" alt="EU Bathing Water API"/> EU Bathing Water API
 _Where to safely swim in open water in Europe?_
 
 ## Data

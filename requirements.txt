@@ -8,3 +8,4 @@ geojson
 tqdm
 colorama
 humanize
+beautifulsoup4

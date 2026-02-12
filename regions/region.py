@@ -29,12 +29,12 @@ class Region():
         self.log.info(f'{self.description()} - Loading URL: {url}')
         return get(url, headers=headers).json();
 
-    def loadWFSLayer(self, layer_name, wfs_url, method='GET'):
+    def loadWFSLayer(self, layer_name, wfs_url, method='GET',):
         params = dict(service='WFS', version="2.0.0", request='GetFeature',
-        typeName=layer_name, outputFormat='json', srsName="EPSG:4326")
-
-        self.log.info(f'{self.description()} - Loading layer: {layer_name} ({wfs_url})')
+                            typeName=layer_name, outputFormat='json', srsName="EPSG:4326")
+        
         wfs_request_url = Request(method, wfs_url, params=params).prepare().url
+        self.log.info(f'{self.description()} - Loading layer: {layer_name} ({wfs_url})')
         return gpd.read_file(wfs_request_url) # type: ignore
     
     def _processLocationList(self, data):

@@ -4,3 +4,4 @@ from .switzerland.switzerland import Switzerland
 from .luxembourg.luxembourg import Luxembourg
 from .austria.austria import Austria
 from .poland.poland import Poland
+from .lithuania.lithuania import Lithuania

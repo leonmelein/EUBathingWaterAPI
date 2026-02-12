@@ -22,7 +22,7 @@ class Wallonia(Region):
             for x, y in zip(df['geometry.x'], df['geometry.y'])]
         gdf = GeoDataFrame(df, geometry=geometry).set_crs(crs)
         gdf = gdf.to_crs(4326)
-        gdf['lat'], gdf['long'] = [item.y for item in gdf['geometry']], [
+        gdf['lat'], gdf['lon'] = [item.y for item in gdf['geometry']], [
             item.x for item in gdf['geometry']]
         gdf = gdf.drop(columns=[
             "geometry.x", "geometry.y", "geometry"

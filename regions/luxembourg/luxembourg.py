@@ -19,8 +19,8 @@ class Luxembourg(Region):
             .set_index("id")
 
         data['alternate_name'] = data['name']
-        data[['long', 'lat']] = data['coordinates'].apply(Series)
-        data = data.reindex(columns=["name", "alternate_name", "lat", "long"])
+        data[['lon', 'lat']] = data['coordinates'].apply(Series)
+        data = data.reindex(columns=["name", "alternate_name", "lat", "lon"])
         locations = data.sort_values(by="name")
         
         self._processLocationList(locations)

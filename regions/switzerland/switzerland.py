@@ -24,7 +24,7 @@ class Switzerland(Region):
             .set_index('id')
         
         # Split coordinates into columns
-        df[['long', 'lat']] = df['geometry.coordinates'].apply(pd.Series)
+        df[['lon', 'lat']] = df['geometry.coordinates'].apply(pd.Series)
         locations = df.drop(columns=['geometry.coordinates'])
 
         self._processLocationList(locations)

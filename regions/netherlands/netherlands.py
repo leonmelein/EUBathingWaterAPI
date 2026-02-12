@@ -57,7 +57,7 @@ class Netherlands(Region):
 
         zwemplekdata = base_data.merge(zwemplekken, left_on="zwemwaterlocatie_id", right_on="zwemwaterlocatie_id", how="left")
         zwemplekdata['lat'] = zwemplekdata['geometry'].apply(lambda geom: geom.y if geom else None)
-        zwemplekdata['long'] = zwemplekdata['geometry'].apply(lambda geom: geom.x if geom else None)
+        zwemplekdata['lon'] = zwemplekdata['geometry'].apply(lambda geom: geom.x if geom else None)
         zwemplekdata = zwemplekdata.drop(columns=["korte_naam_x", "naam_x", "status_x", "geometry"])
         zwemplekdata = zwemplekdata.rename(columns={
             "naam_y": "naam",
@@ -143,7 +143,7 @@ class Netherlands(Region):
         # data.fillna({'int_ent': 0}, inplace=True)
 
         finalData = data[[
-            'name', 'alternate_name', 'lat', 'long'
+            'name', 'alternate_name', 'lat', 'lon'
         ]]
 
         self._processLocationList(finalData)

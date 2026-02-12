@@ -4,6 +4,7 @@ from pandas import concat
 import colorama
 import logging
 import time
+import json
 
 from regions import *
 
@@ -42,7 +43,29 @@ class Ingester():
         if self.generateEU:
             eu_data = concat(dataset)
             eu_data.to_json('data/locations.json', orient="records", mode="w")
-        
+
+            geojson = {
+                "type": "FeatureCollection",
+                "features": []
+            }
+
+            # TODO: replace with actual robust encoding
+            for _, item in eu_data.iterrows():
+                feature = {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [item["lon"], item["lat"]]
+                    },
+                    "properties": {
+                        k: v for k, v in item.items() if k not in ("lat", "lon")
+                    }
+                }
+                geojson["features"].append(feature)
+
+            with open("data/locations.geojson", "w", encoding="utf-8") as f:
+                json.dump(geojson, f, ensure_ascii=False, indent=2)
+                    
         self._postStep()
 
     def _preStep(self):

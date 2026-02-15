@@ -1,0 +1,1 @@
+URL: [https://badplatsen.havochvatten.se/badplatsen/api/feature/](https://badplatsen.havochvatten.se/badplatsen/api/feature/)

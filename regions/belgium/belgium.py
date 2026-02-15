@@ -1,6 +1,7 @@
 from regions.region import Region
 from regions.belgium.flanders import Flanders
 from regions.belgium.wallonia import Wallonia
+
 from tqdm import tqdm
 from pandas import concat
 

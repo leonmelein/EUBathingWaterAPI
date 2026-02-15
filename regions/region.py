@@ -39,7 +39,7 @@ class Region():
     
     def _processLocationList(self, data):
         # All locations per region
-        data.to_json(f'{self.filepath}/locations.json', orient="records", mode="w")
+        data.to_json(f'{self.filepath}/locations.json', orient="records", mode="w", force_ascii=False)
 
     def _processIndividualLocations(self, data):
         # Individual location data
@@ -49,4 +49,4 @@ class Region():
             row_dict = row.to_dict()
             filename = f'{self.filepath}/locations/{id}.json'
             with open(filename, 'w+') as f:
-                dump(row_dict, f, indent=2)
+                dump(row_dict, f, indent=2, ensure_ascii=False)

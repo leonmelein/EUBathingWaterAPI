@@ -1,0 +1,1 @@
+- Map service locked to French IP addresses only

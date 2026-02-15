@@ -6,3 +6,4 @@ from .austria import Austria
 from .poland import Poland
 from .lithuania import Lithuania
 from .sweden import Sweden
+from .denmark import Denmark

@@ -13,7 +13,7 @@ class Sweden(Region):
         df = json_normalize(data['features'])
 
         df = df[["properties.NUTSKOD", "properties.NAMN", "properties.KMN_NAMN", "geometry.coordinates"]]
-        df[['lat', 'lon']] = df['geometry.coordinates'].apply(
+        df[['lon', 'lat']] = df['geometry.coordinates'].apply(
             lambda c: Series(self._split_coords(c))
         )
         df.drop('geometry.coordinates', axis=1, inplace=True)

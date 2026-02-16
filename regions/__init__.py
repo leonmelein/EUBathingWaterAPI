@@ -8,3 +8,4 @@ from .lithuania import Lithuania
 from .sweden import Sweden
 from .denmark import Denmark
 from .czechia import Czechia
+from .slovakia import Slovakia

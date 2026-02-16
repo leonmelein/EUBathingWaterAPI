@@ -91,7 +91,8 @@ if __name__ == "__main__":
         # Poland()
         Lithuania(),
         Sweden(),
-        Denmark()
+        Denmark(),
+        Czechia()
     ]
     loader = Ingester(regions, generateEU=True)
     loader.ingest()

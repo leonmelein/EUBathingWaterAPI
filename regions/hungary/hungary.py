@@ -31,8 +31,8 @@ class Hungary(Region):
             "Cím": "address",
             "Vízminőség": "quality"
         }, axis=1, inplace=True)
-        df['lat'] = df['coordinates'].apply(lambda x: x.split(',')[0])
-        df['lon'] = df['coordinates'].apply(lambda x: x.split(',')[1])
+        df['lat'] = df['coordinates'].apply(lambda x: float(x.split(',')[0]))
+        df['lon'] = df['coordinates'].apply(lambda x: float(x.split(',')[1]))
 
         df['id'] = range(1, len(parsed_locations) + 1)
         df = df[[

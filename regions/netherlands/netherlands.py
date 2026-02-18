@@ -21,7 +21,8 @@ class Netherlands(Region):
     def ingest(self):
         # Base Data
         zwemplekken = self.loadWFSLayer("zwr_public:zwemplekken", self.url)
-        zwemplekken = zwemplekken.drop(columns=['id', 'datum']).set_index('key_id')
+        zwemplekken = zwemplekken.drop(columns=['id', 'datum'])\
+            # .set_index('key_id')
         zwemplekken.drop_duplicates(subset=['zwemwaterlocatie_id'], inplace=True)
 
         zwemplekken_details = self.loadWFSLayer("zwr_public:zwemplekken_details", self.url)
@@ -100,7 +101,7 @@ class Netherlands(Region):
             "INTTNLETRCCN": "int_ent",
             "voorziening_type_id": "voorzieningen"
         }, inplace=True)
-        data.set_index("id", inplace=True)
+        # data.set_index("id", inplace=True)
         data['name'] = data['name']\
             .str.strip()\
             .str.title()\
@@ -143,7 +144,7 @@ class Netherlands(Region):
         # data.fillna({'int_ent': 0}, inplace=True)
 
         finalData = data[[
-            'name', 'alternate_name', 'lat', 'lon'
+            'id', 'name', 'alternate_name', 'lat', 'lon'
         ]]
 
         self._processLocationList(finalData)

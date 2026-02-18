@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="supluskohad">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="supluskoht" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:integer" name="id"/>
+              <xs:element type="xs:string" name="nimetus"/>
+              <xs:element type="xs:string" name="supluskoha_grupi_id"/>
+              <xs:element type="supluskoht_tyyp" name="tyyp"/>
+              <xs:element type="xs:string" name="supluskoha_avaandmete_URL"/>
+              <xs:element type="xs:string" name="suplusvee_profiili_URL" minOccurs="0"/>
+              <xs:element type="xs:string" name="aadress"/>
+              <xs:element name="koordinaadid">
+                <xs:complexType mixed="true">
+                  <xs:sequence>
+                    <xs:element name="koordinaat" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:float" name="x"/>
+                          <xs:element type="xs:float" name="y"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="veekogu_nimi"/>
+              <xs:element type="xs:string" name="veekogu_tyyp"/>
+              <xs:element type="xs:integer" name="kylastajate_arv"/>
+              <xs:element type="xs:float" name="rannajoone_pikkus"/>
+              <xs:element type="xs:string" name="supluskoha_piirjooned" minOccurs="0" maxOccurs="1"/>
+              <xs:element type="xs:string" name="seirekalendri_kooskolastamise_kuupaev"/>
+              <xs:element type="xs:date" name="viimane_inspekteerimine" minOccurs="0"/>
+              <xs:element type="xs:string" name="inspekteerija" minOccurs="0"/>
+              <xs:element type="xs:date" name="viimane_proovivott" minOccurs="0"/>
+              <xs:element type="xs:string" name="veekvaliteet"/>
+              <xs:element type="xs:string" name="suplusvee_kvaliteediklass" minOccurs="0"/>
+              <xs:element type="xs:string" name="proovivotu_metoodikad" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="proovivotu_metoodika" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="proovivotuprotokolli_number"/>
+              <xs:element type="xs:string" name="kaaskirja_number" minOccurs="0"/>
+              <xs:element type="xs:string" name="proovivotja_amet" minOccurs="0"/>
+              <xs:element name="proovivotukohad" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="proovivotukoht" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:integer" name="id"/>
+                          <xs:element type="xs:string" name="nimi"/>
+                          <xs:element type="xs:string" name="aadress"/>
+                          <xs:element name="koordinaadid" minOccurs="0">
+                            <xs:complexType mixed="true">
+                              <xs:sequence>
+                                <xs:element name="koordinaat" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element type="xs:float" name="x"/>
+                                      <xs:element type="xs:float" name="y"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element type="xs:string" name="asukoha_tapsustus" minOccurs="0"/>
+                          <xs:element type="xs:string" name="veeallika_liik"/>
+                          <xs:element type="xs:string" name="proovivotukoha_liik"/>
+                          <xs:element type="xs:string" name="proovivotukoha_liigitus"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="inspektori_kommentaarid"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+    <xs:simpleType name="supluskoht_tyyp" final="restriction" >
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="supluskoht" />
+        <xs:enumeration value="avalik veekogu" />
+      </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

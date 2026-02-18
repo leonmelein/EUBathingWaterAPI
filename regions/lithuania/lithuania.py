@@ -10,7 +10,11 @@ class Lithuania(Region):
         data = self.loadWFSLayer('pds_22_01:AM.BathingWaters', self.url)
         data['name'] = data['name'].apply(lambda x: x.title())
         data['lat'], data['lon'] = [item.y for item in data['geometry']], [item.x for item in data['geometry']]
-        data = data[['localid', 'name', 'lat', 'lon']]
+        data.rename(mapper={
+            "localid": id
+        }, axis=1, inplace=True)
+
+        data = data[['id', 'name', 'lat', 'lon']]
 
         self._processLocationList(data)
         self._processIndividualLocations(data)

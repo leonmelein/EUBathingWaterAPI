@@ -10,3 +10,5 @@ from .denmark import Denmark
 from .czechia import Czechia
 from .slovakia import Slovakia
 from .hungary import Hungary
+from .estonia import Estonia
+from .united_kingdom import UnitedKingdom

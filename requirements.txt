@@ -9,3 +9,4 @@ tqdm
 colorama
 humanize
 beautifulsoup4
+geopy

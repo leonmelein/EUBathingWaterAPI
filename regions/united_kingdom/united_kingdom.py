@@ -1,6 +1,10 @@
 from regions.region import Region
+from regions.united_kingdom.england import England
+from regions.united_kingdom.wales import Wales
+from regions.united_kingdom.scotland import Scotland
+from regions.united_kingdom.northern_ireland import NorthernIreland
+
 from tqdm import tqdm
-from regions.united_kingdom import *
 from pandas import concat
 
 class UnitedKingdom(Region):

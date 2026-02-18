@@ -34,7 +34,7 @@ class Hungary(Region):
         df['lat'] = df['coordinates'].apply(lambda x: float(x.split(',')[0]))
         df['lon'] = df['coordinates'].apply(lambda x: float(x.split(',')[1]))
 
-        df['id'] = range(1, len(parsed_locations) + 1)
+        df['id'] = self._syntheticIds(len(df))
         df = df[[
             'id', 'name', 'lat', 'lon'
         ]]
@@ -42,3 +42,6 @@ class Hungary(Region):
         self._processLocationList(df)
         self._processIndividualLocations(df)
         return df
+
+    def _syntheticIds(self, length):
+        return [f'HU000{i}' for i in range(1, length + 1)]

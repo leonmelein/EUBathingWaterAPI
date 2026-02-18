@@ -25,17 +25,14 @@ class Poland(Region):
 
         regex = r"var markers = (\[\n.*\],\n.\s\s\s\s\s\s\s\s\s\s\s\s\])"
         test = re.search(regex, map, re.DOTALL)
-        scraped_data = None
+        
         if test:
             scraped_data = json5.loads(test.group(1))
         else:
-            print("No match")
-
-        if not scraped_data:
             return None
         
         df = pd.DataFrame(
-            scraped_data,
+            scraped_data, # type: ignore
             columns=["lon", "lat", "html", "color"]
         )
 
@@ -68,12 +65,11 @@ class Poland(Region):
         return url[0]
 
     def _collect_id(self, row):
-        id = ""
         url = self._collect_url(row)
         if len(url) > 0:
             return url.split('/')[4]
         else:
-            return None
+            return ''
 
     def _collect_status(self, row):
         status = True

@@ -16,11 +16,10 @@ class Luxembourg(Region):
                     "geometry.coordinates": "coordinates",
                     "properties.OBJECTID": "id"
             })\
-            .set_index("id")
 
         data['alternate_name'] = data['name']
         data[['lon', 'lat']] = data['coordinates'].apply(Series)
-        data = data.reindex(columns=["name", "alternate_name", "lat", "lon"])
+        data = data.reindex(columns=["id", "name", "alternate_name", "lat", "lon"])
         locations = data.sort_values(by="name")
         
         self._processLocationList(locations)

@@ -5,7 +5,7 @@ class Scotland(Region):
     url = "https://map.sepa.org.uk/server/rest/services/Open/Environmental_Monitoring/MapServer/1/query?f=json&where=(1%3D1)%20AND%20(1%3D1)&returnGeometry=true&spatialRel=esriSpatialRelIntersects&outFields=*&orderByFields=OBJECTID%20ASC&outSR=4326&resultOffset=0&resultRecordCount=100"
 
     def __init__(self):
-        Region.__init__(self, 'gb-sct', 'Scotland')
+        Region.__init__(self, 'gb-sct', 'United Kingdom', 'Scotland')
     
     def ingest(self):
         data = self.loadJSON(self.url)

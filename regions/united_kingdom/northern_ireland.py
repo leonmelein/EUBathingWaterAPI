@@ -6,7 +6,7 @@ class NorthernIreland(Region):
 
 
     def __init__(self):
-        Region.__init__(self, 'gb-nir', 'Northern Ireland')
+        Region.__init__(self, 'gb-nir', 'United Kingdom', 'Northern Ireland')
     
     def ingest(self):
         data = self.loadJSON(self.url)

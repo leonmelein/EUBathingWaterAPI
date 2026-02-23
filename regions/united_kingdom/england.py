@@ -6,7 +6,7 @@ class England(Region):
     url = "https://environment.data.gov.uk/doc/bathing-water?_pageSize=1000&_view=bathing-water&_properties=latestProfile.countyName.name%2Cdistrict.alias%2ClatestSampleAssessment.sampleDateTime.ordinalYear%2ClatestComplianceAssessment.sampleYear.ordinalYear%2ClatestComplianceAssessment.assessmentQualifier%2ClatestComplianceAssessment.assessmentRegime&_lang=en%2Ccy%2Cnone&country=http%3A%2F%2Fdata.ordnancesurvey.co.uk%2Fid%2Fcountry%2Fengland&_query-id=XbY01NFqXbY"
 
     def __init__(self):
-        Region.__init__(self, 'gb-eng', 'England')
+        Region.__init__(self, 'gb-eng', 'United Kingdom', 'England')
     
     def ingest(self):
         data = self.loadJSON(self.url)

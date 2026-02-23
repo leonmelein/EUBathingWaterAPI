@@ -23,7 +23,7 @@ class Austria(Region):
             "BEZIRK": "alternate_name",
             "LATITUDE": "lat",
             "LONGITUDE": "lon"
-        }).set_index("id")
+        })
 
         locations['lat'], locations['lon'] = locations['lat'].astype(
             'float'), locations['lon'].astype('float')

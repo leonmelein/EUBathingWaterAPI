@@ -1,9 +1,9 @@
-# Ireland
+# Lithuania
 
 | Properties |      |
 |------------|------|
-| ISO Code   | `IE` |
+| ISO Code   | `LT` |
 | Regional   | No   |
-| Type       | JSON |
+| Type       | WFS  |
 
 ## Data source

@@ -1,27 +1,40 @@
-# Data sources
+# 🇪🇺 EU Bathing Water API
 
-Official government data for the following regions is currently retrieved:
+## Countries
 
-| Country | Region(s)        | Date added    |
-|---------|------------------|---------------|
-| 🇳🇱 NL | All                | January 2023  |
-| 🇧🇪 BE | All                | March 2023    |
-| 🇩🇪 DE | Hamburg            | January 2024  |
-| 🇩🇪 DE | NRW                | February 2024 |
-| 🇩🇪 DE | Schleswig-Holstein | In progress   |
-| 🇱🇺 LU | All                | August 2023   |
-| 🇦🇹 AT | All                | March 2023    |
-| 🇨🇭 CH | All                | February 2024 |
-| 🇬🇧 GB | England            | July 2023     |
-| 🇬🇧 GB | Wales              | February 2023 |
-| 🇬🇧 GB | Scotland           | January 2024  |
-| 🇬🇧 GB | Northern Ireland   | January 2024  |
-| 🇮🇪 IE | Ireland            | February 2023 |
+- 🇦🇱 Albania
+- [🇦🇹 Austria](./eu/austria/index.md)
+- [🇧🇪 Belgium](./eu/belgium/index.md)
+- 🇧🇬 Bulgaria
+- [🇭🇷 Croatia](./eu/croatia/index.md)
+- 🇨🇾 Cyprus
+- [🇨🇿 Czechia](./eu/czechia/index.md)
+- [🇩🇰 Denmark](./eu/denmark/index.md)
+- [🇪🇪 Estonia](./eu/estonia/index.md)
+- 🇫🇮 Finland
+- [🇫🇷 France](./eu/france/index.md)
+- [🇩🇪 Germany](./eu/germany/index.md)
+- 🇬🇷 Greece
+- [🇭🇺 Hungary](./eu/hungary/index.md)
+- [🇮🇪 Ireland](./eu/ireland/index.md)
+- 🇮🇹 Italy
+- [🇱🇻 Latvia](./eu/latvia/index.md)
+- [🇱🇹 Lithuania](./eu/lithuania/index.md)
+- [🇱🇺 Luxembourg](./eu/luxembourg/index.md)
+- 🇲🇹 Malta
+- [🇱🇺 Netherlands](./eu/netherlands/index.md)
+- [🇳🇴 Norway](./other/norway/index.md)
+- [🇵🇱 Poland](./eu/poland/index.md)
+- 🇵🇹 Portugal
+- 🇷🇴 Romania
+- [🇸🇰 Slovakia](./eu/slovakia/index.md)
+- 🇸🇮 Slovenia
+- 🇪🇸 Spain
+- [🇸🇪 Sweden](./eu/sweden/index.md)
+- [🇨🇭 Switzerland](./other/switzerland/index.md)
+- [🇬🇧 United Kingdom](./other/united-kingdom/index.md)
 
-Supplemental data is currently only provided for The Netherlands. This includes:
+## Other
 
-| Region | Type              | Source                   | Notes                                                               |
-|--------|-------------------|--------------------------|---------------------------------------------------------------------|
-| 🇳🇱 NL  | Location          | Marineterrein, Amsterdam | Privately monitored, not yet received EU bathing water designation  |
-| 🇳🇱 NL  | Location          | Sloterplas, Amsterdam    | Former designated swimming spot. On the road to recovery.           |
-| 🇳🇱 NL  | Water temperature | Meetnet Water            | Estimation of current water temperature based on closest open water |
+- General tips and tricks
+- EU legislation

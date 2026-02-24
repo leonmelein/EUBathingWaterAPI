@@ -1,5 +1,11 @@
 # Estonia
 
+| Properties |      |
+|------------|------|
+| ISO Code   | `EE` |
+| Regional   | No   |
+| Type       | XML  |
+
 ## Issues
 - Not all locations have GPS coordinates
 

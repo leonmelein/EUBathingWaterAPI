@@ -1,10 +1,19 @@
 # Austria
 
-Reverse engineering from Badegewässer app.
+| Properties |      |
+|------------|------|
+| ISO Code   | `AT` |
+| Regional   | No   |
+| Type       | JSON |
+
+## Data source
+Using the feed from the official Badegewässer app.
 
 ## Data
-Feed: https://www.ages.at/typo3temp/badegewaesser_db.json
+Feed: [https://www.ages.at/typo3temp/badegewaesser_db.json](https://www.ages.at/typo3temp/badegewaesser_db.json
+)
 
+Example output:
 ```json
 "MESSWERTE": [
     {

@@ -1,13 +1,20 @@
 # Netherlands
-Source: 
 
-# Zwemwater.nl Signaalwaarden
+| Properties |      |
+|------------|------|
+| ISO Code   | `NL` |
+| Regional   | No   |
+| Type       | WFS  |
+
+## Data source
+[Zwemwater.nl](https://zwemwater.nl) is the primary source for all bathing water related measurements and warnings. We pull the data directly from their WFS service.
+
+# Signaalwaarden
 | EC    | IE    |
 | ----- | ----- |
 | 1800  | 400   |
 
 # Swimspot
-
 | Name              | Type          | Values                        |
 |-------------------|---------------|-------------------------------|
 | name              | string        |                               |

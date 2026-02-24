@@ -1,0 +1,1 @@
+from .latvia import Latvia

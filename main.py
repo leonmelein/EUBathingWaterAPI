@@ -5,6 +5,8 @@ import colorama
 import logging
 import time
 import json
+from numpy import nan
+from geojson import Feature, Point, FeatureCollection, dump
 
 from regions import *
 
@@ -44,27 +46,22 @@ class Ingester():
             eu_data = concat(dataset)
             eu_data.to_json('data/locations.json', orient="records", mode="w")
 
-            geojson = {
-                "type": "FeatureCollection",
-                "features": []
-            }
-
-            # TODO: replace with actual robust encoding
+            # GeoJSON generation
+            collection = []
             for _, item in eu_data.iterrows():
-                feature = {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [item["lon"], item["lat"]]
-                    },
-                    "properties": {
-                        k: v for k, v in item.items() if k not in ("lat", "lon")
-                    }
-                }
-                geojson["features"].append(feature)
-
+                if item['lat'] is not nan and item['lon'] is not nan:
+                    feature = Feature(
+                        # id=item['id'],
+                        geometry=Point((item['lon'], item['lat'])),
+                        properties={
+                            "name": item['name']
+                        }
+                    )
+                    collection.append(feature)
+            
             with open("data/locations.geojson", "w", encoding="utf-8") as f:
-                json.dump(geojson, f, ensure_ascii=False, indent=2)
+                data = FeatureCollection(collection)
+                dump(data, f, ensure_ascii=False)
                     
         self._postStep()
 
@@ -96,7 +93,8 @@ if __name__ == "__main__":
         Slovakia(),
         Hungary(),
         UnitedKingdom(),
-        Croatia()
+        Croatia(),
+        Latvia()
     ]
     loader = Ingester(regions, generateEU=True)
     loader.ingest()

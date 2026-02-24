@@ -48,6 +48,12 @@ class Region():
 
         for id, row in data.iterrows():
             row_dict = row.to_dict()
-            filename = f'{self.filepath}/locations/{id}.json'
+            name = id
+            try:
+                name = row['id']
+            except:
+                pass
+        
+            filename = f'{self.filepath}/locations/{name}.json'
             with open(filename, 'w+') as f:
                 dump(row_dict, f, indent=2, ensure_ascii=False)

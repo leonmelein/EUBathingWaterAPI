@@ -1,9 +1,8 @@
 # Belgium
-
 | Properties |      |
 |------------|------|
 | ISO Code   | `BE` |
-| Regional   | Yes   
+| Regional   | Yes  |
 | Type       | JSON |
 
 ## Data sources

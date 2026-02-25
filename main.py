@@ -80,21 +80,22 @@ class Ingester():
 
 if __name__ == "__main__":
     regions = [
-        Netherlands(),
-        Belgium(),
-        Austria(),
-        Switzerland(),
-        Luxembourg(),
-        # Poland()
-        Lithuania(),
-        Sweden(),
-        Denmark(),
-        Czechia(),
-        Slovakia(),
-        Hungary(),
-        UnitedKingdom(),
-        Croatia(),
-        Latvia()
+        # Netherlands(),
+        # Belgium(),
+        # Austria(),
+        # Switzerland(),
+        # Luxembourg(),
+        # # Poland()
+        # Lithuania(),
+        # Sweden(),
+        # Denmark(),
+        # Czechia(),
+        # Slovakia(),
+        # Hungary(),
+        # UnitedKingdom(),
+        # Croatia(),
+        # Latvia()
+        Ireland()
     ]
     loader = Ingester(regions, generateEU=True)
     loader.ingest()

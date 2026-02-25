@@ -14,3 +14,4 @@ from .estonia import Estonia
 from .united_kingdom import UnitedKingdom
 from .croatia import Croatia
 from .latvia import Latvia
+from .ireland import Ireland

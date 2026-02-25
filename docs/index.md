@@ -15,35 +15,34 @@ I want to gather this data in real-time so swimmers and travelers across Europe 
 
 ## Countries
 
-
-- 🇦🇱 Albania
+- [🇦🇱 Albania](./other/albania/index.md)
 - [🇦🇹 Austria](./eu/austria/index.md)
 - [🇧🇪 Belgium](./eu/belgium/index.md)
-- 🇧🇬 Bulgaria
+- [🇧🇬 Bulgaria](./eu/bulgaria/index.md)
 - [🇭🇷 Croatia](./eu/croatia/index.md)
-- 🇨🇾 Cyprus
+- [🇨🇾 Cyprus](./eu/cyprus/index.md)
 - [🇨🇿 Czechia](./eu/czechia/index.md)
 - [🇩🇰 Denmark](./eu/denmark/index.md)
 - [🇪🇪 Estonia](./eu/estonia/index.md)
-- 🇫🇮 Finland
+- [🇫🇮 Finland](./eu/finland/index.md)
 - [🇫🇷 France](./eu/france/index.md)
 - [🇩🇪 Germany](./eu/germany/index.md)
-- 🇬🇷 Greece
+- [🇬🇷 Greece](./eu/greece/index.md)
 - [🇭🇺 Hungary](./eu/hungary/index.md)
 - [🇮🇪 Ireland](./eu/ireland/index.md)
-- 🇮🇹 Italy
+- [🇮🇹 Italy](./eu/italy/index.md)
 - [🇱🇻 Latvia](./eu/latvia/index.md)
 - [🇱🇹 Lithuania](./eu/lithuania/index.md)
 - [🇱🇺 Luxembourg](./eu/luxembourg/index.md)
-- 🇲🇹 Malta
+- [🇲🇹 Malta](./eu/malta/index.md)
 - [🇱🇺 Netherlands](./eu/netherlands/index.md)
 - [🇳🇴 Norway](./other/norway/index.md)
 - [🇵🇱 Poland](./eu/poland/index.md)
-- 🇵🇹 Portugal
-- 🇷🇴 Romania
+- [🇵🇹 Portugal](./eu/portugal/index.md)
+- [🇷🇴 Romania](./eu/romania/index.md)
 - [🇸🇰 Slovakia](./eu/slovakia/index.md)
-- 🇸🇮 Slovenia
-- 🇪🇸 Spain
+- [🇸🇮 Slovenia](./eu/slovenia/index.md)
+- [🇪🇸 Spain](./eu/spain/index.md)
 - [🇸🇪 Sweden](./eu/sweden/index.md)
 - [🇨🇭 Switzerland](./other/switzerland/index.md)
 - [🇬🇧 United Kingdom](./other/united-kingdom/index.md)

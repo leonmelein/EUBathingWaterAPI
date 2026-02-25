@@ -60,7 +60,7 @@ class Ingester():
                     collection.append(feature)
             
             with open("data/locations.geojson", "w", encoding="utf-8") as f:
-                data = FeatureCollection(collection)
+                data = FeatureCollection(collection, bbox=[35.537814,-29.623947,71.499216,41.567459])
                 dump(data, f, ensure_ascii=False)
                     
         self._postStep()

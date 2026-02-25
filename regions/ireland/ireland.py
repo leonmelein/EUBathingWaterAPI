@@ -19,9 +19,7 @@ class Ireland(Region):
         geometry = [Point(x, y) for x, y in zip(df['easting'], df['northing'])]
         gdf = GeoDataFrame(df, geometry=geometry)
         gdf.set_crs(29903, inplace=True)
-        print(gdf.crs)
         gdf = gdf.to_crs(4326)
-        print(gdf.crs)
 
         lat, lon = [item.y for item in gdf['geometry']], [item.x for item in gdf['geometry']]
         gdf['lat'] = lat

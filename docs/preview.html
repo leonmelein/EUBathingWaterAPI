@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bathing Water Locations</title>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  >
+  <style>
+    :root {
+      --bg: #65bfff;
+      --panel: rgba(255, 255, 255, 0.92);
+      --text: #102018;
+      --muted: #5a6b62;
+      --accent: #0f766e;
+      --accent-2: #14b8a6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(20, 184, 166, 0.16), transparent 45%),
+        radial-gradient(circle at 90% 20%, rgba(0, 166, 255, 0.12), transparent 40%),
+        var(--bg);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-height: 100vh;
+      gap: 12px;
+      padding: 12px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid rgba(16, 32, 24, 0.08);
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 10px 30px rgba(16, 32, 24, 0.06);
+    }
+
+    .header {
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    #map {
+      min-height: 70vh;
+      height: calc(100vh - 88px);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .status-error {
+      color: #b91c1c;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <div class="panel header">
+      <h1>Bathing Water Locations</h1>
+      <div id="status" class="meta">Loading GeoJSON…</div>
+    </div>
+    <div id="map" class="panel" aria-label="Map of bathing water locations"></div>
+  </div>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script>
+    const statusEl = document.getElementById("status");
+    const map = L.map("map", {
+      zoomControl: true,
+      preferCanvas: true
+    }).setView([54, 15], 4);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    async function loadGeoJson() {
+      const candidates = ["../data/locations.geojson"];
+      let lastError = null;
+
+      for (const path of candidates) {
+        try {
+          const response = await fetch(path);
+          if (!response.ok) {
+            throw new Error(`${response.status} ${response.statusText}`);
+          }
+          const geojson = await response.json();
+          return { path, geojson };
+        } catch (error) {
+          lastError = error;
+        }
+      }
+
+      throw lastError ?? new Error("Unable to load GeoJSON");
+    }
+
+    function popupHtml(feature) {
+      const props = feature?.properties ?? {};
+      const name = props.name ?? "Unnamed location";
+      const extra = Object.entries(props)
+        .filter(([key]) => key !== "name")
+        .slice(0, 6)
+        .map(([key, value]) => `<div><strong>${key}</strong>: ${String(value)}</div>`)
+        .join("");
+
+      return `<div><strong>${name}</strong>${extra ? `<hr>${extra}` : ""}</div>`;
+    }
+
+    loadGeoJson()
+      .then(({ path, geojson }) => {
+        const layer = L.geoJSON(geojson, {
+          pointToLayer: (_, latlng) => L.circleMarker(latlng, {
+            radius: 4,
+            weight: 1,
+            color: "#0f766e",
+            fillColor: "#14b8a6",
+            fillOpacity: 0.75
+          }),
+          onEachFeature: (feature, featureLayer) => {
+            featureLayer.bindPopup(popupHtml(feature), { maxWidth: 280 });
+          }
+        }).addTo(map);
+
+        const bounds = layer.getBounds();
+        if (bounds.isValid()) {
+          map.fitBounds(bounds.pad(0.05));
+        }
+
+        const count = Array.isArray(geojson.features) ? geojson.features.length : 0;
+        statusEl.textContent = `Loaded ${count.toLocaleString()} locations from ${path}`;
+      })
+      .catch((error) => {
+        console.error(error);
+        statusEl.textContent = `Failed to load GeoJSON: ${error.message}`;
+        statusEl.classList.add("status-error");
+      });
+  </script>
+</body>
+</html>

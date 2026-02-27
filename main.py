@@ -92,7 +92,7 @@ if __name__ == "__main__":
         Czechia(),
         Slovakia(),
         Hungary(),
-        # UnitedKingdom(),
+        UnitedKingdom(),
         Croatia(),
         Latvia(),
         Ireland(),

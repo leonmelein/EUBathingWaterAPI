@@ -9,17 +9,22 @@ from regions.region import Region
 class Poland(Region):
     url = 'https://sk.gis.gov.pl/kapieliska/mapa'
 
-    def __init__(self):
+    def __init__(self, cookies):
         Region.__init__(self, 'pl', "Poland")
+        self.cookies = cookies
 
     def ingest(self):
-        headers = {
-                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
-                "Cookie": ""
-        }
-        website = requests.get(self.url, headers=headers)
+        if self.cookies:
+            headers = {
+                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
+                    "Cookie": ""
+            }
+            website = requests.get(self.url, headers=headers)
+            soup = BeautifulSoup(website.text, "html.parser")
+        else:
+            with open('./regions/poland/mapa.html', 'r') as webpage:
+                soup = BeautifulSoup(webpage, "html.parser")
 
-        soup = BeautifulSoup(website.text, "html.parser")
         scripts = soup.find_all("script")
         map = scripts[-2].text
 

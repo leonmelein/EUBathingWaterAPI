@@ -1,0 +1,2 @@
+from .malta import Malta
+

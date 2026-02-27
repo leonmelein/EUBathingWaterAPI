@@ -4,7 +4,6 @@ from pandas import concat
 import colorama
 import logging
 import time
-import json
 from numpy import nan
 from geojson import Feature, Point, FeatureCollection, dump
 
@@ -93,7 +92,7 @@ if __name__ == "__main__":
         Czechia(),
         Slovakia(),
         Hungary(),
-        UnitedKingdom(),
+        # UnitedKingdom(),
         Croatia(),
         Latvia(),
         Ireland(),

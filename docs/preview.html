@@ -110,24 +110,20 @@
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
-    async function loadGeoJson() {
-      const candidates = ["../data/locations.geojson"];
-      let lastError = null;
+    const countryCodes = [
+      "at", "be", "ch", "cz", "de", "dk", "ee", "gr",
+      "hr", "hu", "ie", "lt", "lu", "lv", "nl", "pl",
+      "se", "sk", "uk"
+    ];
 
-      for (const path of candidates) {
-        try {
-          const response = await fetch(path);
-          if (!response.ok) {
-            throw new Error(`${response.status} ${response.statusText}`);
-          }
-          const geojson = await response.json();
-          return { path, geojson };
-        } catch (error) {
-          lastError = error;
-        }
+    async function loadCountryGeoJson(isoCode) {
+      const path = `../data/${isoCode}/locations.geojson`;
+      const response = await fetch(path);
+      if (!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`);
       }
-
-      throw lastError ?? new Error("Unable to load GeoJSON");
+      const geojson = await response.json();
+      return { isoCode, path, geojson };
     }
 
     function popupHtml(feature) {
@@ -142,32 +138,61 @@
       return `<div><strong>${name}</strong>${extra ? `<hr>${extra}` : ""}</div>`;
     }
 
-    loadGeoJson()
-      .then(({ path, geojson }) => {
-        const layer = L.geoJSON(geojson, {
-          pointToLayer: (_, latlng) => L.circleMarker(latlng, {
-            radius: 4,
-            weight: 1,
-            color: "#0f766e",
-            fillColor: "#14b8a6",
-            fillOpacity: 0.75
-          }),
-          onEachFeature: (feature, featureLayer) => {
-            featureLayer.bindPopup(popupHtml(feature), { maxWidth: 280 });
-          }
-        }).addTo(map);
+    Promise.allSettled(countryCodes.map((isoCode) => loadCountryGeoJson(isoCode)))
+      .then((results) => {
+        const palette = ["#0f766e", "#0369a1", "#1d4ed8", "#6d28d9", "#b91c1c", "#15803d", "#854d0e"];
+        const overlays = {};
+        const allLayers = [];
+        let loadedLayers = 0;
+        let failedLayers = 0;
+        let totalCount = 0;
 
-        const bounds = layer.getBounds();
-        if (bounds.isValid()) {
-          map.fitBounds(bounds.pad(0.05));
+        results.forEach((result, index) => {
+          if (result.status !== "fulfilled") {
+            failedLayers += 1;
+            return;
+          }
+
+          const { isoCode, geojson } = result.value;
+          const color = palette[index % palette.length];
+          const layer = L.geoJSON(geojson, {
+            pointToLayer: (_, latlng) => L.circleMarker(latlng, {
+              radius: 4,
+              weight: 1,
+              color,
+              fillColor: color,
+              fillOpacity: 0.75
+            }),
+            onEachFeature: (feature, featureLayer) => {
+              featureLayer.bindPopup(popupHtml(feature), { maxWidth: 280 });
+            }
+          }).addTo(map);
+
+          const count = Array.isArray(geojson.features) ? geojson.features.length : 0;
+          totalCount += count;
+          loadedLayers += 1;
+          overlays[`${isoCode.toUpperCase()} (${count.toLocaleString()})`] = layer;
+          allLayers.push(layer);
+        });
+
+        if (allLayers.length > 0) {
+          const group = L.featureGroup(allLayers);
+          const bounds = group.getBounds();
+          if (bounds.isValid()) {
+            map.fitBounds(bounds.pad(0.05));
+          }
+          L.control.layers(null, overlays, { collapsed: false }).addTo(map);
         }
 
-        const count = Array.isArray(geojson.features) ? geojson.features.length : 0;
-        statusEl.textContent = `Loaded ${count.toLocaleString()} locations from ${path}`;
+        if (loadedLayers === 0) {
+          throw new Error("No country GeoJSON files could be loaded");
+        }
+
+        statusEl.textContent = `Loaded ${totalCount.toLocaleString()} locations from ${loadedLayers} country layers${failedLayers ? ` (${failedLayers} failed)` : ""}`;
       })
       .catch((error) => {
         console.error(error);
-        statusEl.textContent = `Failed to load GeoJSON: ${error.message}`;
+        statusEl.textContent = `Failed to load country GeoJSON layers: ${error.message}`;
         statusEl.classList.add("status-error");
       });
   </script>

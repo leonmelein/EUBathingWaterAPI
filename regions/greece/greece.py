@@ -20,7 +20,14 @@ class Greece(Region):
             return pd.DataFrame()
 
         drupalJson = json.loads(dataset.text)
-        df = pd.json_normalize(drupalJson['coastMap']['coast-map-69a01bf273704']['monitors'])
+        coast_map = drupalJson.get("coastMap", {})
+        coast_map_key = next((k for k in coast_map if k.startswith("coast-map-")), None)
+        if not coast_map_key:
+            return pd.DataFrame()
+
+        df = pd.json_normalize(coast_map[coast_map_key].get("monitors", []))
+        if df.empty:
+            return pd.DataFrame()
         df.rename(mapper={
             'title': 'id',
             'coast_name': 'name'

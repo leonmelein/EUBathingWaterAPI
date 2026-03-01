@@ -10,10 +10,9 @@ class Estonia(Region):
     url = "https://vtiav.sm.ee/index.php/opendata/supluskohad.xml"
 
     def __init__(self):
-        Region.__init__(self, 'ee', 'Estonia')
+        Region.__init__(self, 'ee', 'Estonia - WORK IN PROGRESS')
 
     def ingest(self):
-        print("THIS DATA IS NOT COMPLETE. WORK IN PROGRESS.")
         data = requests.get(self.url).text
 
         df = pd.read_xml(

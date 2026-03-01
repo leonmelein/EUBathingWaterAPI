@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bathing Water Locations</title>
+  <title>Swimspots</title>
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -12,12 +12,12 @@
   >
   <style>
     :root {
-      --bg: #65bfff;
+      --bg: #ffffff;
       --panel: rgba(255, 255, 255, 0.92);
       --text: #102018;
       --muted: #5a6b62;
       --accent: #0f766e;
-      --accent-2: #14b8a6;
+      --accent-2: #003399;
     }
 
     * {
@@ -29,8 +29,6 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 10% 10%, rgba(20, 184, 166, 0.16), transparent 45%),
-        radial-gradient(circle at 90% 20%, rgba(0, 166, 255, 0.12), transparent 40%),
         var(--bg);
     }
 
@@ -87,7 +85,7 @@
 <body>
   <div class="layout">
     <div class="panel header">
-      <h1>Bathing Water Locations</h1>
+      <h1>🇪🇺 Swimspots</h1>
       <div id="status" class="meta">Loading GeoJSON…</div>
     </div>
     <div id="map" class="panel" aria-label="Map of bathing water locations"></div>
@@ -111,9 +109,9 @@
     }).addTo(map);
 
     const countryCodes = [
-      "at", "be", "ch", "cz", "de", "dk", "ee", "gr",
-      "hr", "hu", "ie", "lt", "lu", "lv", "nl", "pl",
-      "se", "sk", "uk"
+      "at", "be", "ch", "cz", "de", "dk", "ee", "fi", "gr",
+      "hr", "hu", "ie", "it", "lt", "lu", "lv", "mt", "nl", 
+      "pl", "pt", "se", "sk", "uk"
     ];
 
     async function loadCountryGeoJson(isoCode) {
@@ -181,14 +179,14 @@
           if (bounds.isValid()) {
             map.fitBounds(bounds.pad(0.05));
           }
-          L.control.layers(null, overlays, { collapsed: false }).addTo(map);
+          L.control.layers(null, overlays, { collapsed: true }).addTo(map);
         }
 
         if (loadedLayers === 0) {
           throw new Error("No country GeoJSON files could be loaded");
         }
 
-        statusEl.textContent = `Loaded ${totalCount.toLocaleString()} locations from ${loadedLayers} country layers${failedLayers ? ` (${failedLayers} failed)` : ""}`;
+        statusEl.textContent = `Loaded ${totalCount.toLocaleString()} locations from ${loadedLayers} countries${failedLayers ? ` (${failedLayers} failed)` : ""}`;
       })
       .catch((error) => {
         console.error(error);

@@ -11,4 +11,4 @@ humanize
 beautifulsoup4
 geopy
 kml2geojson
-fiona
+json5

@@ -7,6 +7,7 @@ from .austria import Austria
 from .poland import Poland
 from .lithuania import Lithuania
 from .sweden import Sweden
+from .finland import Finland
 from .denmark import Denmark
 from .czechia import Czechia
 from .slovakia import Slovakia
@@ -18,3 +19,4 @@ from .latvia import Latvia
 from .ireland import Ireland
 from .greece import Greece
 from .malta import Malta
+from .portugal import Portugal

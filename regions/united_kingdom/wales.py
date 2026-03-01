@@ -16,5 +16,6 @@ class Wales(Region):
             "samplingPoint.lat": "lat",
             "samplingPoint.long": "lon"
         })
+        df["name"] = [item[1]['_value'] for item in df['name']]
         df = df[["id", "name", "lat", "lon"]]
         return df

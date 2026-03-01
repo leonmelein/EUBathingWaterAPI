@@ -37,12 +37,21 @@
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
+    map.locate({ setView: true, maxZoom: 4 });
 
     const countryCodes = [
       "at", "be", "ch", "cz", "de", "dk", "ee", "fi", "gr",
       "hr", "hu", "ie", "it", "lt", "lu", "lv", "mt", "nl", 
       "pl", "pt", "se", "sk", "uk"
     ];
+
+    function onLocationFound(e) {
+            var radius = e.accuracy;
+            L.marker(e.latlng).addTo(map)
+            L.circle(e.latlng, radius).addTo(map);
+        }
+
+        map.on('locationfound', onLocationFound);
 
     async function loadCountryGeoJson(isoCode) {
       const path = `../data/${isoCode}/locations.geojson`;

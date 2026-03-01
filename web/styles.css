@@ -1,0 +1,100 @@
+:root {
+    --bg: #ffffff;
+    --panel: rgba(255, 255, 255, 0.92);
+    --text: #102018;
+    --muted: #5a6b62;
+    --accent: #0f766e;
+    --accent-2: #003399;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    color: var(--text);
+    background:
+    var(--bg);
+}
+
+.layout {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+    gap: 12px;
+    padding: 12px;
+}
+
+.panel {
+    background: var(--panel);
+    border: 1px solid rgba(16, 32, 24, 0.08);
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 30px rgba(16, 32, 24, 0.06);
+}
+
+.header {
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.meta {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+#map {
+    min-height: 70vh;
+    height: calc(100vh - 88px);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.status-error {
+    color: #b91c1c;
+    font-weight: 600;
+}
+
+.leaflet-control-layers.leaflet-control {
+    border-radius: 2em;
+}
+
+.leaflet-control-layers.leaflet-control.leaflet-control-layers-expanded {
+    border-radius: 2em;
+    padding: 1em;
+}
+
+.leaflet-control-layers-overlays > label > span > input {
+    border-radius: 1em;
+}
+
+.leaflet-control-zoom.leaflet-bar.leaflet-control {
+    border-radius: 1em;
+}
+
+.leaflet-touch .leaflet-bar a {
+    line-height: 25px;
+}
+
+.leaflet-touch .leaflet-bar a:first-child {
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em
+}
+
+.leaflet-touch .leaflet-bar a:last-child {
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em
+}

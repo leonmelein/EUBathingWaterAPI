@@ -21,7 +21,7 @@ body {
 .layout {
     display: grid;
     grid-template-rows: auto 1fr;
-    min-height: 100vvh;
+    min-height: 100svh;
     gap: 12px;
     padding: 12px;
 }
@@ -56,10 +56,14 @@ body {
 }
 
 #map {
-    min-height: 70vvh;
-    height: calc(100vh - 88px);
+    /* min-height: 70dvh; */
+    height: calc(98svh - 88px);
     border-radius: 12px;
     overflow: hidden;
+}
+
+#map:focus {
+    outline: none;
 }
 
 .status-error {

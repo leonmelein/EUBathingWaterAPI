@@ -7,3 +7,4 @@ data/countries/dataset.sqlite3
 env/
 data/
 *.log
+*.env

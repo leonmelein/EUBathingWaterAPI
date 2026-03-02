@@ -1,0 +1,17 @@
+{
+  "name": "Swimspots",
+  "short_name": "Swimspots",
+  "theme_color": "#4A90E2",
+  "background_color": "#fff",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

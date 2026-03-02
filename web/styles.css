@@ -15,14 +15,13 @@ body {
     margin: 0;
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     color: var(--text);
-    background:
-    var(--bg);
+    background: var(--bg);
 }
 
 .layout {
     display: grid;
     grid-template-rows: auto 1fr;
-    min-height: 100vh;
+    min-height: 100vvh;
     gap: 12px;
     padding: 12px;
 }
@@ -57,7 +56,7 @@ body {
 }
 
 #map {
-    min-height: 70vh;
+    min-height: 70vvh;
     height: calc(100vh - 88px);
     border-radius: 12px;
     overflow: hidden;

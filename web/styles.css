@@ -57,9 +57,15 @@ body {
 
 #map {
     /* min-height: 70dvh; */
-    height: calc(98svh - 88px);
+    height: calc(99svh - 88px);
     border-radius: 12px;
     overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+    #map {
+        height: calc(96svh - 88px);
+    }
 }
 
 #map:focus {

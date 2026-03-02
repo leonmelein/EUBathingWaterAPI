@@ -64,7 +64,7 @@ body {
 
 @media screen and (max-width: 768px) {
     #map {
-        height: calc(96svh - 88px);
+        height: calc(96dvh - 88px);
     }
 }
 

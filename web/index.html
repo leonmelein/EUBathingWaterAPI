@@ -96,7 +96,7 @@ Promise.allSettled(countryCodes.map((isoCode) => loadCountryGeoJson(isoCode)))
             const color = palette[index % palette.length];
             const layer = L.geoJSON(geojson, {
                 pointToLayer: (_, latlng) => L.circleMarker(latlng, {
-                    radius: 2,
+                    radius: 4,
                     weight: 1,
                     color,
                     fillColor: color,

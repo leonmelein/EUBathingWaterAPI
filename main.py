@@ -96,12 +96,13 @@ if __name__ == "__main__":
         Hungary(),
         # UnitedKingdom(),
         Croatia(),
+        Slovenia(),
         Latvia(),
         Ireland(),
         Estonia(),
         Greece(),
         Malta()
     ]
-    # regions = [France()]
+    # regions = [Slovenia()]
     loader = Ingester(regions, generateEU=True)
     loader.ingest()

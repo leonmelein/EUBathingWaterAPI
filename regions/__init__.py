@@ -21,3 +21,4 @@ from .ireland import Ireland
 from .greece import Greece
 from .malta import Malta
 from .portugal import Portugal
+from .slovenia import Slovenia

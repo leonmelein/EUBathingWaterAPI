@@ -1,6 +1,7 @@
 from .netherlands import Netherlands
 from .belgium import Belgium
 from .germany import Germany
+from .france import France
 from .switzerland import Switzerland
 from .luxembourg import Luxembourg
 from .austria import Austria

@@ -11,8 +11,42 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 map.locate({ setView: true, maxZoom: 4 });
 
 const countryCodes = [
-    "al", "at", "be", "bg", "ch", "cy", "cz", "de", "dk", "ee", "es", "fr", "fi", "gr", "hr", "hu", "ie", "it", "lt", "lu", "lv", "mt", "nl", "pl", "pt", "ro", "se", "si", "sk", "uk"
+    "al", "at", "be", "bg", "cy", "cz", "de", "dk", "ee", "es", "fr", "fi", "gr", "hr", "hu", "ie", "it", "lt", "lu", "lv", "mt", "nl", "pl", "pt", "ro", "se", "sk", "si", "ch", "uk"
 ];
+
+const countriesByIso = {
+    al: "Albania",
+    at: "Austria",
+    be: "Belgium",
+    bg: "Bulgaria",
+    cy: "Cyprus",
+    cz: "Czechia",
+    de: "Germany",
+    dk: "Denmark",
+    ee: "Estonia",
+    es: "Spain",
+    fr: "France",
+    fi: "Finland",
+    gr: "Greece",
+    hr: "Croatia",
+    hu: "Hungary",
+    ie: "Ireland",
+    it: "Italy",
+    lt: "Lithuania",
+    lu: "Luxembourg",
+    lv: "Latvia",
+    mt: "Malta",
+    nl: "Netherlands",
+    pl: "Poland",
+    pt: "Portugal",
+    ro: "Romania",
+    se: "Sweden",
+    si: "Slovenia",
+    sk: "Slovakia",
+    ch: "Switzerland",
+    uk: "United Kingdom"
+};
+
 
 function onLocationFound(e) {
     var radius = e.accuracy;
@@ -77,7 +111,7 @@ Promise.allSettled(countryCodes.map((isoCode) => loadCountryGeoJson(isoCode)))
             const count = Array.isArray(geojson.features) ? geojson.features.length : 0;
             totalCount += count;
             loadedLayers += 1;
-            overlays[`${isoCode.toUpperCase()} (${count.toLocaleString()})`] = layer;
+            overlays[`${countriesByIso[isoCode]} (${count.toLocaleString()})`] = layer;
             allLayers.push(layer);
         });
 

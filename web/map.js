@@ -121,7 +121,7 @@ Promise.allSettled(countryCodes.map((isoCode) => loadCountryGeoJson(isoCode)))
             const em = parseFloat(getComputedStyle(document.documentElement).fontSize);
 
             map.fitBounds(bounds.pad(0.05), {
-                paddingTopLeft: [0, em]   // 1em top padding
+                paddingTopLeft: [0, 20]   // 1em top padding
             });
 
             L.control.layers(null, overlays, { collapsed: true }).addTo(map);

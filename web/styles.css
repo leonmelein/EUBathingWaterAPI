@@ -41,6 +41,14 @@ body {
     gap: 12px;
     align-items: baseline;
     flex-wrap: wrap;
+    position: absolute;
+    top: 0;
+    margin: .5em;
+    z-index: 1;
+    width: calc(100vw - 1em);
+    background: rgba(255, 255, 255, 0.7);
+    filter: drop-shadow(1em 1em 5em rgba(255,255,255,0.2));
+    backdrop-filter: blur(.1em);
 }
 
 .header h1 {
@@ -56,10 +64,14 @@ body {
 }
 
 #map {
-    /* min-height: 70dvh; */
-    height: calc(99svh - 88px);
-    border-radius: 12px;
+    height: 100dvh;
+    width: 100dvw;
+    z-index: 0;
     overflow: hidden;
+}
+
+.leaflet-top {
+    top: 5em;
 }
 
 @media screen and (max-width: 768px) {

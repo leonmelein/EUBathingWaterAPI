@@ -4,12 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Swimspots</title>
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""
-  >
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <link rel="stylesheet" href="styles.css" />
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" type="image/png" sizes="192x192" href="/192.png">
@@ -22,118 +17,7 @@
     </div>
     <div id="map" class="panel" aria-label="Map of bathing water locations"></div>
   </div>
-
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""
-  ></script>
-  <script>
-    const statusEl = document.getElementById("status");
-const map = L.map("map", {
-    zoomControl: true,
-    preferCanvas: true
-}).setView([54, 15], 6);
-
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
-map.locate({ setView: true, maxZoom: 4 });
-
-const countryCodes = [
-    "at", "be", "ch", "cz", "de", "dk", "ee", "fr", "fi", "gr",
-    "hr", "hu", "ie", "it", "lt", "lu", "lv", "mt", "nl",
-    "pl", "pt", "se", "si", "sk", "uk"
-];
-
-function onLocationFound(e) {
-    var radius = e.accuracy;
-    L.marker(e.latlng).addTo(map)
-    L.circle(e.latlng, radius).addTo(map);
-}
-
-map.on('locationfound', onLocationFound);
-
-async function loadCountryGeoJson(isoCode) {
-    const path = `../data/${isoCode}/locations.geojson`;
-    const response = await fetch(path);
-    if (!response.ok) {
-        throw new Error(`${response.status} ${response.statusText}`);
-    }
-    const geojson = await response.json();
-    return { isoCode, path, geojson };
-}
-
-function popupHtml(feature) {
-    const props = feature?.properties ?? {};
-    const name = props.name ?? "Unnamed location";
-    const extra = Object.entries(props)
-        .filter(([key]) => key !== "name")
-        .slice(0, 6)
-        .map(([key, value]) => `<div><strong>${key}</strong>: ${String(value)}</div>`)
-        .join("");
-
-    return `<div><strong>${name}</strong>${extra ? `<hr>${extra}` : ""}</div>`;
-}
-
-Promise.allSettled(countryCodes.map((isoCode) => loadCountryGeoJson(isoCode)))
-    .then((results) => {
-        const palette = ["#0f766e", "#0369a1", "#1d4ed8", "#6d28d9", "#b91c1c", "#15803d", "#854d0e"];
-        const overlays = {};
-        const allLayers = [];
-        let loadedLayers = 0;
-        let failedLayers = 0;
-        let totalCount = 0;
-
-        results.forEach((result, index) => {
-            if (result.status !== "fulfilled") {
-                failedLayers += 1;
-                return;
-            }
-
-            const { isoCode, geojson } = result.value;
-            const color = palette[index % palette.length];
-            const layer = L.geoJSON(geojson, {
-                pointToLayer: (_, latlng) => L.circleMarker(latlng, {
-                    radius: 4,
-                    weight: 1,
-                    color,
-                    fillColor: color,
-                    fillOpacity: 0.75
-                }),
-                onEachFeature: (feature, featureLayer) => {
-                    featureLayer.bindPopup(popupHtml(feature), { maxWidth: 280 });
-                }
-            }).addTo(map);
-
-            const count = Array.isArray(geojson.features) ? geojson.features.length : 0;
-            totalCount += count;
-            loadedLayers += 1;
-            overlays[`${isoCode.toUpperCase()} (${count.toLocaleString()})`] = layer;
-            allLayers.push(layer);
-        });
-
-        if (allLayers.length > 0) {
-            const group = L.featureGroup(allLayers);
-            const bounds = group.getBounds();
-            if (bounds.isValid()) {
-                map.fitBounds(bounds.pad(0.05));
-            }
-            L.control.layers(null, overlays, { collapsed: true }).addTo(map);
-        }
-
-        if (loadedLayers === 0) {
-            throw new Error("No country GeoJSON files could be loaded");
-        }
-
-        statusEl.textContent = `Loaded ${totalCount.toLocaleString()} locations from ${loadedLayers} countries${failedLayers ? ` (${failedLayers} failed)` : ""}`;
-    })
-    .catch((error) => {
-        console.error(error);
-        statusEl.textContent = `Failed to load country GeoJSON layers: ${error.message}`;
-        statusEl.classList.add("status-error");
-    });
-  </script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="map.js" integrity="sha384-jN3gheflZvOXDNabgBpf7eV6szzCneNKhjOh4/LuBAE6uo4lknKsBtIn/V/d0kX/" crossorigin=""></script>
 </body>
 </html>

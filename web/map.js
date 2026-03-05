@@ -2,7 +2,7 @@ const statusEl = document.getElementById("status");
 const map = L.map("map", {
     zoomControl: true,
     preferCanvas: true
-}).setView([54, 15], 4);
+}).setView([54, 15], 6);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
@@ -11,9 +11,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 map.locate({ setView: true, maxZoom: 4 });
 
 const countryCodes = [
-    "at", "be", "ch", "cz", "de", "dk", "ee", "fi", "gr",
-    "hr", "hu", "ie", "it", "lt", "lu", "lv", "mt", "nl",
-    "pl", "pt", "se", "sk", "uk"
+    "al", "at", "be", "bg", "ch", "cy", "cz", "de", "dk", "ee", "es", "fr", "fi", "gr", "hr", "hu", "ie", "it", "lt", "lu", "lv", "mt", "nl", "pl", "pt", "ro", "se", "si", "sk", "uk"
 ];
 
 function onLocationFound(e) {
@@ -86,9 +84,12 @@ Promise.allSettled(countryCodes.map((isoCode) => loadCountryGeoJson(isoCode)))
         if (allLayers.length > 0) {
             const group = L.featureGroup(allLayers);
             const bounds = group.getBounds();
-            if (bounds.isValid()) {
-                map.fitBounds(bounds.pad(0.05));
-            }
+            const em = parseFloat(getComputedStyle(document.documentElement).fontSize);
+
+            map.fitBounds(bounds.pad(0.05), {
+                paddingTopLeft: [0, em]   // 1em top padding
+            });
+
             L.control.layers(null, overlays, { collapsed: true }).addTo(map);
         }
 

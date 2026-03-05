@@ -20,5 +20,10 @@ from .latvia import Latvia
 from .ireland import Ireland
 from .greece import Greece
 from .malta import Malta
+from .spain import Spain
 from .portugal import Portugal
 from .slovenia import Slovenia
+from .bulgaria import Bulgaria
+from .cyprus import Cyprus
+from .albania import Albania
+from .romania import Romania

@@ -12,3 +12,4 @@ beautifulsoup4
 geopy
 kml2geojson
 json5
+openpyxl

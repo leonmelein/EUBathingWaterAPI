@@ -1,8 +1,8 @@
-# Cyprus
+# Albania
 
 | Properties |      |
 |------------|------|
-| ISO Code   | `CY` |
+| ISO Code   | `AL` |
 | Regional   | -    |
 | Type       | -    |
 

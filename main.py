@@ -81,28 +81,34 @@ if __name__ == "__main__":
     regions = [
         Netherlands(),
         Belgium(),
+        Luxembourg(),
         Germany(),
         France(),
+        Spain(),
+        Portugal(),
+        # UnitedKingdom(),
+        Ireland(),
         Austria(),
         Switzerland(),
-        Luxembourg(),
         Poland(cookies=None),
         Lithuania(),
+        Estonia(),
+        Latvia(),
         Sweden(),
         Finland(),
         Denmark(),
         Czechia(),
         Slovakia(),
         Hungary(),
-        # UnitedKingdom(),
-        Croatia(),
+        Bulgaria(),
+        Romania(),
         Slovenia(),
-        Latvia(),
-        Ireland(),
-        Estonia(),
+        Croatia(),
+        Albania(),
         Greece(),
+        Cyprus(),
         Malta()
     ]
-    # regions = [Slovenia()]
+    # regions = [Albania(), Cyprus(), Bulgaria()]
     loader = Ingester(regions, generateEU=True)
     loader.ingest()

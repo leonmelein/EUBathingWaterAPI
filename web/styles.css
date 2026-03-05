@@ -75,8 +75,8 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-    #map {
-        height: calc(96dvh - 88px);
+    .leaflet-top {
+        top: 7em;
     }
 }
 

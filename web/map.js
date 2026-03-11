@@ -10,10 +10,6 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 map.locate({ setView: true, maxZoom: 4 });
 
-const countryCodes = [
-    "al", "at", "be", "bg", "cy", "cz", "de", "dk", "ee", "es", "fr", "fi", "gr", "hr", "hu", "ie", "it", "lt", "lu", "lv", "mt", "nl", "pl", "pt", "ro", "se", "sk", "si", "ch", "uk"
-];
-
 const countriesByIso = {
     al: "Albania",
     at: "Austria",
@@ -78,7 +74,7 @@ function popupHtml(feature) {
     return `<div><strong>${name}</strong>${extra ? `<hr>${extra}` : ""}</div>`;
 }
 
-Promise.allSettled(countryCodes.map((isoCode) => loadCountryGeoJson(isoCode)))
+Promise.allSettled(Object.keys(countriesByIso).map((isoCode) => loadCountryGeoJson(isoCode)))
     .then((results) => {
         const palette = ["#0f766e", "#0369a1", "#1d4ed8", "#6d28d9", "#b91c1c", "#15803d", "#854d0e"];
         const overlays = {};

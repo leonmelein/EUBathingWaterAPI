@@ -1,11 +1,12 @@
-import requests
-import pandas as pd
 import sqlite3
 
-from shapely.geometry import Point
+import pandas as pd
+import requests
 from geopandas import GeoDataFrame
+from shapely.geometry import Point
 
 from regions.region import Region
+
 
 class Ireland(Region):
     url = "https://data.epa.ie/bw/api/v1/locations?per_page=500"
@@ -32,6 +33,7 @@ class Ireland(Region):
         gdf = gdf[[
             "id", "name", "lat", "lon"
         ]]
+        gdf['country'] = self.iso_code
 
         self._processLocationList(gdf)
         self._processIndividualLocations(gdf)

@@ -1,11 +1,12 @@
-from io import StringIO, BytesIO
 import zipfile
+from io import BytesIO, StringIO
 
 import kml2geojson
-import requests
 import pandas as pd
+import requests
 
 from regions.region import Region
+
 
 class Latvia(Region):
     url = "https://www.google.com/maps/d/kml?mid=1vP3B4hda5fYtW4GSoQVLJXJxqIM"
@@ -41,6 +42,7 @@ class Latvia(Region):
         data = data [[
             "id", "name", "lat", "lon"
         ]]
+        data['country'] = self.iso_code
 
         self._processLocationList(data)
         self._processIndividualLocations(data)

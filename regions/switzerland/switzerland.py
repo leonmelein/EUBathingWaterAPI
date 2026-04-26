@@ -1,5 +1,7 @@
-from regions.region import Region
 import pandas as pd
+
+from regions.region import Region
+
 
 class Switzerland(Region):
     url = "https://api3.geo.admin.ch/rest/services/api/MapServer/find?layer=ch.bafu.gewaesserschutz-badewasserqualitaet&sr=4326&geometryFormat=geojson&searchText=CH&searchField=id"
@@ -20,11 +22,11 @@ class Switzerland(Region):
                     'geometry.type', 'properties.groupid', 'properties.nwunitname', 'properties.gemeinde', 'properties.bwatercat',
                     'properties.canton', 'properties.url', 'properties.baquaimg', 'properties.year_bw', 'properties.qualitaet'
                 ]
-            )\
-            .set_index('id')
+            )
         
         # Split coordinates into columns
         df[['lon', 'lat']] = df['geometry.coordinates'].apply(pd.Series)
+        df['country'] = self.iso_code
         locations = df.drop(columns=['geometry.coordinates'])
 
         self._processLocationList(locations)

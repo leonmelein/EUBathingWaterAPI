@@ -1,5 +1,6 @@
 from regions.region import Region
 
+
 class Lithuania(Region):
     url = "https://www.inspire-geoportal.lt/geoserver/ows"
 
@@ -15,6 +16,7 @@ class Lithuania(Region):
         }, axis=1, inplace=True)
 
         data = data[['id', 'name', 'lat', 'lon']]
+        data['country'] = self.iso_code
 
         self._processLocationList(data)
         self._processIndividualLocations(data)

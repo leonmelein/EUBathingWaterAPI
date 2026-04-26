@@ -1,5 +1,7 @@
-from regions.region import Region
 from pandas import json_normalize
+
+from regions.region import Region
+
 
 class Austria(Region):
     url = 'https://www.ages.at/typo3temp/badegewaesser_db.json'
@@ -27,6 +29,7 @@ class Austria(Region):
 
         locations['lat'], locations['lon'] = locations['lat'].astype(
             'float'), locations['lon'].astype('float')
+        locations['country'] = self.iso_code
         
         self._processLocationList(locations)
         self._processIndividualLocations(locations)

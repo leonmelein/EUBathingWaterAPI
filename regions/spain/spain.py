@@ -1,6 +1,8 @@
-from regions.region import Region
-import pandas as pd
 import pickle
+
+import pandas as pd
+
+from regions.region import Region
 
 
 class Spain(Region):
@@ -25,6 +27,7 @@ class Spain(Region):
             "bathingWaterName": "name",
         }, axis=1, inplace=True)
         spain['name'] = spain['name'].str.title()
+        spain['country'] = self.iso_code
         
         self._processLocationList(spain)
         self._processIndividualLocations(spain)

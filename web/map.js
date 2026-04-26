@@ -1,13 +1,15 @@
-const statusEl = document.getElementById("status");
 const map = L.map("map", {
     zoomControl: true,
     preferCanvas: true
 }).setView([54, 15], 6);
+const attributionControl = map.attributionControl;
+let loadStatusAttribution = "Loading GeoJSON...";
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
+attributionControl.addAttribution(loadStatusAttribution);
 map.locate({ setView: true, maxZoom: 4 });
 
 const countriesByIso = {
@@ -43,6 +45,39 @@ const countriesByIso = {
     uk: "United Kingdom"
 };
 
+const countryColorsByIso = {
+    al: "#da291c",
+    at: "#ed2939",
+    be: "#b31b34",
+    bg: "#00966e",
+    cy: "#d57800",
+    cz: "#11457e",
+    de: "#000000",
+    dk: "#c60c30",
+    ee: "#4891d9",
+    es: "#aa151b",
+    fr: "#0055a4",
+    fi: "#003580",
+    gr: "#0d5eaf",
+    hr: "#cf1020",
+    hu: "#436f4d",
+    ie: "#169b62",
+    it: "#009246",
+    lt: "#fdb913",
+    lu: "#00a3e0",
+    lv: "#9e3039",
+    mt: "#cf142b",
+    nl: "#b85c00",
+    pl: "#dc143c",
+    pt: "#046a38",
+    ro: "#002b7f",
+    se: "#006aa7",
+    si: "#005da4",
+    sk: "#0b4ea2",
+    ch: "#d52b1e",
+    uk: "#012169"
+};
+
 
 function onLocationFound(e) {
     var radius = e.accuracy;
@@ -74,23 +109,28 @@ function popupHtml(feature) {
     return `<div><strong>${name}</strong>${extra ? `<hr>${extra}` : ""}</div>`;
 }
 
+function setLoadStatus(message) {
+    attributionControl.removeAttribution(loadStatusAttribution);
+    loadStatusAttribution = message;
+    attributionControl.addAttribution(loadStatusAttribution);
+}
+
 Promise.allSettled(Object.keys(countriesByIso).map((isoCode) => loadCountryGeoJson(isoCode)))
     .then((results) => {
-        const palette = ["#0f766e", "#0369a1", "#1d4ed8", "#6d28d9", "#b91c1c", "#15803d", "#854d0e"];
         const overlays = {};
         const allLayers = [];
         let loadedLayers = 0;
         let failedLayers = 0;
         let totalCount = 0;
 
-        results.forEach((result, index) => {
+        results.forEach((result) => {
             if (result.status !== "fulfilled") {
                 failedLayers += 1;
                 return;
             }
 
             const { isoCode, geojson } = result.value;
-            const color = palette[index % palette.length];
+            const color = countryColorsByIso[isoCode] ?? "#0f766e";
             const layer = L.geoJSON(geojson, {
                 pointToLayer: (_, latlng) => L.circleMarker(latlng, {
                     radius: 4,
@@ -127,10 +167,9 @@ Promise.allSettled(Object.keys(countriesByIso).map((isoCode) => loadCountryGeoJs
             throw new Error("No country GeoJSON files could be loaded");
         }
 
-        statusEl.textContent = `Loaded ${totalCount.toLocaleString()} locations from ${loadedLayers} countries${failedLayers ? ` (${failedLayers} failed)` : ""}`;
+        setLoadStatus(`${totalCount.toLocaleString()} locations in ${loadedLayers} countries${failedLayers ? ` (${failedLayers} failed)` : ""}`);
     })
     .catch((error) => {
         console.error(error);
-        statusEl.textContent = `Failed to load country GeoJSON layers: ${error.message}`;
-        statusEl.classList.add("status-error");
+        setLoadStatus(`Failed to load country GeoJSON layers: ${error.message}`);
     });

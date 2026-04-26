@@ -1,6 +1,7 @@
+import pandas as pd
+
 from regions.region import Region
 
-import pandas as pd
 
 class Croatia(Region):
     url = "https://vrtlac.izor.hr/ords/kakvoca/kakvoce_sve_json?p_jezik=en"
@@ -22,6 +23,7 @@ class Croatia(Region):
         df = df[[
             "id", "name", "lat", "lon"
         ]]
+        df['country'] = self.iso_code
 
         self._processLocationList(df)
         self._processIndividualLocations(df)

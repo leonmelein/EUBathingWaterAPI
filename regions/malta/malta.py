@@ -1,6 +1,8 @@
-from regions.region import Region
 import pandas as pd
 import requests
+
+from regions.region import Region
+
 
 class Malta(Region):
 
@@ -24,6 +26,7 @@ class Malta(Region):
             'geometry.x': 'lon',
             'geometry.y': 'lat'
         }, axis=1, inplace=True)
+        dataset['country'] = self.iso_code
 
         self._processLocationList(dataset)
         self._processIndividualLocations(dataset)

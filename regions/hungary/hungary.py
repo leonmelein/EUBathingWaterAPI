@@ -1,8 +1,11 @@
-from regions.region import Region
+from io import StringIO
+
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
-from io import StringIO
+
+from regions.region import Region
+
 
 class Hungary(Region):
     url = "https://nnk.gov.hu/index.php/kozegeszsegugyi-laboratoriumi-foosztaly/terkepes-informaciok/furdovizminosegi-terkep"
@@ -38,6 +41,7 @@ class Hungary(Region):
         df = df[[
             'id', 'name', 'lat', 'lon'
         ]]
+        df['country'] = self.iso_code
 
         self._processLocationList(df)
         self._processIndividualLocations(df)

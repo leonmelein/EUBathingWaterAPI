@@ -1,5 +1,6 @@
 from regions.region import Region
 
+
 class Slovakia(Region):
     url = 'https://geoserver.isuvz.uvzsr.sk/geoserver/wfs'
     
@@ -16,6 +17,7 @@ class Slovakia(Region):
         data = data[[
             'id', 'name', 'alternate_name', 'lat', 'lon'
         ]]
+        data['country'] = self.iso_code
         
         self._processLocationList(data)
         self._processIndividualLocations(data)

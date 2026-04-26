@@ -13,12 +13,29 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="manifest" href="manifest.json" />
     <link rel="icon" type="image/png" sizes="192x192" href="/192.png" />
+    <link rel="me" href="https://mastodon.social/@swimspots" />
+    <meta name="fediverse:creator" content="@swimspots@mastodon.social" />
   </head>
   <body>
-    <div class="panel header">
-      <h1>🇪🇺 Swimspots.eu</h1>
-      <div id="status" class="meta">Loading GeoJSON…</div>
+    <div class="panel header map-header">
+      <a
+        class="brand-block brand-link"
+        href="index.html"
+        aria-label="Swimspots home"
+      >
+        <h1>
+          <img class="brand-mark" src="swimspots-logo.png" alt="" />
+          <span>Swimspots.eu</span>
+        </h1>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <!-- <a class="nav-link active" href="index.html" aria-current="page">Map</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="coverage.html">Coverage</a>
+        <a class="nav-link" href="methodology.html">Methodology</a> -->
+      </nav>
     </div>
+
     <div id="map" aria-label="Map of bathing water locations"></div>
 
     <script

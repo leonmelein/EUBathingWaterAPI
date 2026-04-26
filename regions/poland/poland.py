@@ -1,10 +1,12 @@
-import requests
-from bs4 import BeautifulSoup
 import re
+
 import json5
 import pandas as pd
+import requests
+from bs4 import BeautifulSoup
 
 from regions.region import Region
+
 
 class Poland(Region):
     url = 'https://sk.gis.gov.pl/kapieliska/mapa'
@@ -46,6 +48,7 @@ class Poland(Region):
         df['id'] = df.apply(self._collect_id, axis=1)
         df['url'] = df.apply(self._collect_url, axis=1)
         df = df[["id", "name", "alternate_name", "lat", "lon"]]
+        df['country'] = self.iso_code
 
         self._processLocationList(df)
         self._processIndividualLocations(df)

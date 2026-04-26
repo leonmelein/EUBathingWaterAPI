@@ -1,7 +1,10 @@
-from regions.region import Region
 from io import StringIO
-import requests
+
 import pandas as pd
+import requests
+
+from regions.region import Region
+
 
 class Portugal(Region):
     url = "https://snirh.apambiente.pt/snirh/_dadossintese/zbalnear/xml/xml_praiasano.php?ano=2024&novoConc=&site=&entidade=&dadosrecentes=0&praiascomdadosxdias=0&simples=1"
@@ -29,6 +32,7 @@ class Portugal(Region):
             "lng": "lon"
         }, axis=1, inplace=True)
         df['name'] = df['name'].str.title()
+        df['country'] = self.iso_code
 
         self._processLocationList(df)
         self._processIndividualLocations(df)

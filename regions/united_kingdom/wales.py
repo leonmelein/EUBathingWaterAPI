@@ -1,5 +1,7 @@
-from regions.region import Region
 import pandas as pd
+
+from regions.region import Region
+
 
 class Wales(Region):
     url = "https://environment.data.gov.uk/wales/bathing-waters/doc/bathing-water?_pageSize=1000&_view=bathing-water&_properties=latestProfile.countyName.name%2Cdistrict.alias%2ClatestSampleAssessment.followingSuspension.endOfSuspension%2ClatestSampleAssessment.sampleDateTime.ordinalYear%2ClatestComplianceAssessment.sampleYear.ordinalYear%2ClatestComplianceAssessment.assessmentQualifier%2ClatestComplianceAssessment.assessmentRegime&_lang=en%2Ccy%2Cnone"
@@ -17,5 +19,6 @@ class Wales(Region):
             "samplingPoint.long": "lon"
         })
         df["name"] = [item[1]['_value'] for item in df['name']]
+        df['country'] = self.iso_code
         df = df[["id", "name", "lat", "lon"]]
         return df

@@ -1,5 +1,6 @@
 from regions.region import Region
 
+
 class Netherlands(Region):
     url = "https://pubgeo.zwemwater.nl/geoserver/zwr_public/wfs"
 
@@ -146,6 +147,7 @@ class Netherlands(Region):
         finalData = data[[
             'id', 'name', 'alternate_name', 'lat', 'lon'
         ]]
+        finalData['country'] = self.iso_code
 
         self._processLocationList(finalData)
         self._processIndividualLocations(finalData)

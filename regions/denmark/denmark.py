@@ -1,5 +1,7 @@
-from regions.region import Region
 from pandas import DataFrame
+
+from regions.region import Region
+
 
 class Denmark(Region):
     url = 'https://pulsgeo.miljoeportal.dk/geoserver/wfs'
@@ -21,6 +23,7 @@ class Denmark(Region):
             "Name": "name"
         }, axis=1, inplace=True)
         df = DataFrame(data)
+        df['country'] = self.iso_code
 
         self._processLocationList(df)
         self._processIndividualLocations(df)

@@ -1,6 +1,8 @@
-from regions.region import Region
-from pandas import json_normalize, Series
 import numpy as np
+from pandas import Series, json_normalize
+
+from regions.region import Region
+
 
 class Sweden(Region):
     url = "https://badplatsen.havochvatten.se/badplatsen/api/feature/"
@@ -23,6 +25,7 @@ class Sweden(Region):
             "properties.KMN_NAMN": 'alternate_name', 
             "geometry.coordinates": 'geometry'
         })
+        df['country'] = self.iso_code
 
         self._processLocationList(df)
         self._processIndividualLocations(df)

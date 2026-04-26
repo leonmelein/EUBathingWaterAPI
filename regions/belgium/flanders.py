@@ -2,6 +2,7 @@ import pandas as pd
 
 from regions.region import Region
 
+
 class Flanders(Region):
     url = "https://geo.api.vlaanderen.be/VlaamseZwemwaterlocaties/ogc/features/collections/Vlzwl/items?f=application%2Fgeo%2Bjson"
 
@@ -18,5 +19,6 @@ class Flanders(Region):
         df['alternate_name'] = df['alternate_name'].str.title()
         df['name'] = df['name'].str.title()
         locations = df[['name', 'alternate_name', 'lat', 'lon']]
+        locations['country'] = self.iso_code
 
         return locations

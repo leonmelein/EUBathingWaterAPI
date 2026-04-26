@@ -1,10 +1,12 @@
+from io import StringIO
+
+import pandas as pd
+import requests
 from geopandas import GeoDataFrame
 from shapely import Point
 
 from regions.region import Region
-from io import StringIO
-import requests
-import pandas as pd
+
 
 class Estonia(Region):
     url = "https://vtiav.sm.ee/index.php/opendata/supluskohad.xml"
@@ -35,6 +37,7 @@ class Estonia(Region):
         output = pd.DataFrame(result[[
             'id', 'name', 'lat', 'lon'
         ]])
+        output['country'] = self.iso_code
 
         self._processLocationList(output)
         self._processIndividualLocations(output)

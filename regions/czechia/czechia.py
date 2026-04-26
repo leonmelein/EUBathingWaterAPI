@@ -1,5 +1,7 @@
-from regions.region import Region
 from pandas import json_normalize
+
+from regions.region import Region
+
 
 class Czechia(Region):
     url = 'https://geoportal.mzcr.cz/server/rest/services/VerejneAplikace/KoupaciVody_View/MapServer/0/query?f=pjson&cacheHint=true&resultOffset=0&resultRecordCount=2000&where=1%3D1&orderByFields=OBJECTID&outFields=*&outSR=4326&spatialRel=esriSpatialRelIntersects'
@@ -24,6 +26,7 @@ class Czechia(Region):
             'geometry.y': 'lat',
             'geometry.x': 'lon'
         }, axis=1, inplace=True)
+        json_df['country'] = self.iso_code
 
         self._processLocationList(json_df)
         self._processIndividualLocations(json_df)

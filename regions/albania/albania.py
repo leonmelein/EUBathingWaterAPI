@@ -1,5 +1,6 @@
-from regions.region import Region
 import pickle
+
+from regions.region import Region
 
 
 class Albania(Region):
@@ -24,6 +25,7 @@ class Albania(Region):
             "bathingWaterName": "name",
         }, axis=1, inplace=True)
         albania['name'] = albania['name'].str.title()
+        albania['country'] = self.iso_code
         
         self._processLocationList(albania)
         self._processIndividualLocations(albania)

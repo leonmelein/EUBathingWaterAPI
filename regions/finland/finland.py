@@ -1,5 +1,6 @@
 from regions.region import Region
 
+
 class Finland(Region):
     url = "https://paikkatiedot.ymparisto.fi/geoserver/inspire_am2/wfs"
 
@@ -20,6 +21,7 @@ class Finland(Region):
                 "koorderlong": "lon",
                 "koorderlat": "lat"
         }, axis=1, inplace=True)
+        data['country'] = self.iso_code
 
         self._processLocationList(data)
         self._processIndividualLocations(data)

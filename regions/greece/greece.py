@@ -1,10 +1,11 @@
 import json
-import pandas as pd
 
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
 from regions.region import Region
+
 
 class Greece(Region):
     url = "https://bathingwaterprofiles.gr/en/bathing-waters-coast-map"
@@ -35,6 +36,7 @@ class Greece(Region):
         df = df[[
             'id', 'name', 'lat', 'lon'
         ]]
+        df['country'] = self.iso_code
         
         self._processLocationList(df)
         self._processIndividualLocations(df)

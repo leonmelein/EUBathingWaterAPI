@@ -1,5 +1,7 @@
+from pandas import Series, json_normalize
+
 from regions.region import Region
-from pandas import json_normalize, Series
+
 
 class Luxembourg(Region):
     url = 'https://data.public.lu/fr/datasets/r/5e3ee76e-f206-4e50-8c4c-4bcffc32f2ed'
@@ -21,6 +23,7 @@ class Luxembourg(Region):
         data[['lon', 'lat']] = data['coordinates'].apply(Series)
         data = data.reindex(columns=["id", "name", "alternate_name", "lat", "lon"])
         locations = data.sort_values(by="name")
+        locations['country'] = self.iso_code
         
         self._processLocationList(locations)
         self._processIndividualLocations(locations)

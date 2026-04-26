@@ -1,10 +1,12 @@
-from regions.region import Region
-from dotenv import load_dotenv
-from itertools import islice
-import pandas as pd
 import os
-import requests
 import warnings
+from itertools import islice
+
+import pandas as pd
+import requests
+from dotenv import load_dotenv
+
+from regions.region import Region
 
 
 class France(Region):
@@ -63,6 +65,7 @@ class France(Region):
         df['lat'] = [item[1] for item in df['coordinates']]
         df['name'] = df['name'].str.title()
         df.drop(labels=["coordinates"], axis=1, inplace=True)
+        df['country'] = self.iso_code
         
         self._processLocationList(df)
         self._processIndividualLocations(df)

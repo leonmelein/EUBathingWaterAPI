@@ -1,5 +1,6 @@
-from regions.region import Region
 import pickle
+
+from regions.region import Region
 
 
 class Cyprus(Region):
@@ -24,6 +25,7 @@ class Cyprus(Region):
             "bathingWaterName": "name",
         }, axis=1, inplace=True)
         cyprus['name'] = cyprus['name'].str.title()
+        cyprus['country'] = self.iso_code
         
         self._processLocationList(cyprus)
         self._processIndividualLocations(cyprus)

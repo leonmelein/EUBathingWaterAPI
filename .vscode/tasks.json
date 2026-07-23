@@ -1,20 +1,40 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "ingest",
-            "type": "process",
-            "command": "${command:python.interpreterPath}",
-            "args": [
-                "main.py"
-            ],
-            "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "ingest",
+      "type": "process",
+      "command": "${command:python.interpreterPath}",
+      "args": ["main.py"],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Run HTTP Server",
+      "type": "shell",
+      "command": "python3 -m http.server 8080",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "custom",
+        "pattern": [
+          {
+            "regexp": "^(?!.*)(.*)$",
+            "kind": "file",
+            "file": 1,
+            "message": 1
+          }
+        ],
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*",
+          "endsPattern": "Serving HTTP on .* port 8080 .*"
         }
-    ]
+      }
+    }
+  ]
 }

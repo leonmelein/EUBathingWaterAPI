@@ -29,80 +29,14 @@
         </h1>
       </a>
       <nav class="site-nav" aria-label="Primary">
-        <a class="nav-link active" href="search.html" aria-current="page"
-          >Search</a
-        >
         <a class="nav-link" href="index.html">Map</a>
+        <a class="nav-link active" href="search.html" aria-current="page"
+          >Favorites</a
+        >
         <a class="nav-link" href="about.html" aria-current="page">About</a>
       </nav>
     </div>
-
-    <div id="content">
-      <h1 class="cta">
-        Find your nearest<br class="responsive-break" />
-        safe swimming spot
-      </h1>
-      <div class="search-bar">
-        <select class="country-select">
-          <option value="eu">🇪🇺 EU</option>
-          <option value="al">🇦🇱 AL</option>
-          <option value="at">🇦🇹 AT</option>
-          <option value="be">🇧🇪 BE</option>
-          <option value="bg">🇧🇬 BG</option>
-          <option value="hr">🇭🇷 HR</option>
-          <option value="cy">🇨🇾 CY</option>
-          <option value="cz">🇨🇿 CZ</option>
-          <option value="dk">🇩🇰 DK</option>
-          <option value="ee">🇪🇪 EE</option>
-          <option value="fi">🇫🇮 FI</option>
-          <option value="fr">🇫🇷 FR</option>
-          <option value="de">🇩🇪 DE</option>
-          <option value="gr">🇬🇷 GR</option>
-          <option value="hu">🇭🇺 HU</option>
-          <option value="ie">🇮🇪 IE</option>
-          <option value="it">🇮🇹 IT</option>
-          <option value="lv">🇱🇻 LV</option>
-          <option value="lt">🇱🇹 LT</option>
-          <option value="lu">🇱🇺 LU</option>
-          <option value="mt">🇲🇹 MT</option>
-          <option value="nl">🇳🇱 NL</option>
-          <option value="pl">🇵🇱 PL</option>
-          <option value="pt">🇵🇹 PT</option>
-          <option value="ro">🇷🇴 RO</option>
-          <option value="sk">🇸🇰 SK</option>
-          <option value="si">🇸🇮 SI</option>
-          <option value="es">🇪🇸 ES</option>
-          <option value="se">🇸🇪 SE</option>
-          <option value="ch">🇨🇭 CH</option>
-          <option value="uk">🇬🇧 GB</option>
-        </select>
-        <input
-          class="searchbox"
-          placeholder="Search over 60.000 locations..."
-        />
-        <button class="location">📍</button>
-        <button class="submit">🔎</button>
-      </div>
-
-      <h3 class="cta">Favorites</h3>
-      <div class="saved-locations">
-        <div class="location panel">
-          <h3>Marineterrein</h3>
-          <p>Amsterdam</p>
-        </div>
-        <div class="location panel">
-          <h3>Marineterrein</h3>
-          <p>Amsterdam</p>
-        </div>
-        <div class="location panel">
-          <h3>Marineterrein</h3>
-          <p>Amsterdam</p>
-        </div>
-        <div class="location panel placeholder">
-          <em>+</em>
-        </div>
-      </div>
-    </div>
+    <div id="content"></div>
     <div class="footer">
       <div>
         <a
@@ -195,10 +129,16 @@
     </div>
 
     <script
+      type="module"
+      crossorigin
+      src="/web/search/index-Cd6ZXavp.js"
+    ></script>
+    <link rel="stylesheet" crossorigin href="/web/search/index-BYMtjprZ.css" />
+    <!-- <script
       src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
-    <script src="map.js"></script>
+    <script src="map.js"></script> -->
   </body>
 </html>

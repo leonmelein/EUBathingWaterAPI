@@ -1,3 +1,4 @@
 {
-  "livePreview.defaultPreviewPath": "/web/index.html"
+  "livePreview.defaultPreviewPath": "/web/index.html",
+  "liveServer.settings.NoBrowser": true
 }

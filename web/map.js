@@ -9,7 +9,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
-attributionControl.addAttribution(loadStatusAttribution);
+setLoadStatus(loadStatusAttribution)
 map.locate({ setView: true, maxZoom: 4 });
 
 const countriesByIso = {
@@ -81,7 +81,7 @@ const countryColorsByIso = {
 
 function onLocationFound(e) {
     var radius = e.accuracy;
-    L.marker(e.latlng).addTo(map)
+    L.circleMarker(e.latlng).addTo(map)
     L.circle(e.latlng, radius).addTo(map);
 }
 
@@ -109,10 +109,34 @@ function popupHtml(feature) {
     return `<div><strong>${name}</strong>${extra ? `<hr>${extra}` : ""}</div>`;
 }
 
+function tooltipHtml(feature) {
+    const props = feature?.properties ?? {};
+    const name = props.name ?? "Unnamed location";
+    const extra = Object.entries(props)
+        .filter(([key]) => key !== "name")
+        .slice(0, 6)
+        .map(([key, value]) => `<div><strong>${key}</strong>: ${String(value)}</div>`)
+        .join("");
+
+    return `<strong>${name}</strong>`;
+}
+
 function setLoadStatus(message) {
-    attributionControl.removeAttribution(loadStatusAttribution);
-    loadStatusAttribution = message;
-    attributionControl.addAttribution(loadStatusAttribution);
+    if (screen.width > 768) {
+        attributionControl.removeAttribution(loadStatusAttribution);
+        loadStatusAttribution = message;
+        attributionControl.addAttribution(loadStatusAttribution);
+    }
+}
+
+function closeDialog() {
+    var dialog = document.getElementById('dialog');
+    dialog.style.display = 'none';
+}
+
+function openDialog() {
+    var dialog = document.getElementById('dialog');
+    dialog.style.display = 'block';
 }
 
 Promise.allSettled(Object.keys(countriesByIso).map((isoCode) => loadCountryGeoJson(isoCode)))
@@ -133,14 +157,19 @@ Promise.allSettled(Object.keys(countriesByIso).map((isoCode) => loadCountryGeoJs
             const color = countryColorsByIso[isoCode] ?? "#0f766e";
             const layer = L.geoJSON(geojson, {
                 pointToLayer: (_, latlng) => L.circleMarker(latlng, {
-                    radius: 4,
+                    radius: 6,
                     weight: 1,
                     color,
                     fillColor: color,
                     fillOpacity: 0.75
+                }).on('click', (e) => {
+                    console.log(e);
+                    openDialog();
+                    document.getElementById("title").textContent = e.target.feature.properties.name;
                 }),
                 onEachFeature: (feature, featureLayer) => {
-                    featureLayer.bindPopup(popupHtml(feature), { maxWidth: 280 });
+                    // featureLayer.bindPopup(popupHtml(feature), { maxWidth: 280 });
+                    featureLayer.bindTooltip(tooltipHtml(feature));
                 }
             }).addTo(map);
 
@@ -160,14 +189,16 @@ Promise.allSettled(Object.keys(countriesByIso).map((isoCode) => loadCountryGeoJs
                 paddingTopLeft: [0, 20]   // 1em top padding
             });
 
-            L.control.layers(null, overlays, { collapsed: true }).addTo(map);
+
+            var layerControl = L.control.layers(null, overlays, { collapsed: true }).addTo(map);
+            map.removeControl(layerControl);
         }
 
         if (loadedLayers === 0) {
             throw new Error("No country GeoJSON files could be loaded");
         }
 
-        setLoadStatus(`${totalCount.toLocaleString()} locations in ${loadedLayers} countries${failedLayers ? ` (${failedLayers} failed)` : ""}`);
+        setLoadStatus(`<span class="load-status">${totalCount.toLocaleString()} locations in ${loadedLayers} countries${failedLayers ? ` (${failedLayers} failed)</span>` : ""}`);
     })
     .catch((error) => {
         console.error(error);

@@ -289,11 +289,19 @@ select:focus {
     border: 0.1em rgba(16, 32, 24, 0.2) solid;
   }
 
-  .country-select {
+  & :first-child {
     border-radius: 3em 0 0 3em;
     padding-left: 1em;
     padding-right: 1em;
     border-right-style: none;
+  }
+
+  & :last-child {
+    border-radius: 0 3em 3em 0;
+    padding-left: 1em;
+    padding-right: 1em;
+    background-color: white;
+    border-left-style: none;
   }
 
   .searchbox {
@@ -308,14 +316,6 @@ select:focus {
     background-color: white;
     border-left-style: none;
     border-right-style: none;
-  }
-
-  .submit {
-    border-radius: 0 3em 3em 0;
-    padding-left: 1em;
-    padding-right: 1em;
-    background-color: white;
-    border-left-style: none;
   }
 }
 
@@ -397,6 +397,36 @@ select:focus {
   .search-bar {
     max-width: 100%;
   }
+
+  .load-status {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+.detail-card {
+  z-index: 5000;
+  right: 0;
+  top: 5em;
+  max-width: 24em;
+  max-height: 18em;
+  padding: 1em;
+  background: rgba(255, 255, 255, 0.7);
+  filter: drop-shadow(1em 1em 5em rgba(255, 255, 255, 0.2));
+  backdrop-filter: blur(0.2em);
+  display: none;
+
+  button {
+    background-color: lightgray;
+    border: none;
+    border-radius: 1em;
+    padding: 1em;
+    height: 3em;
+  }
+}
+
+.display-none {
+  display: none;
 }
 
 @media screen and (max-width: 420px) {

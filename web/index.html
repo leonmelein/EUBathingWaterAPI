@@ -29,10 +29,31 @@
         </h1>
       </a>
       <nav class="site-nav" aria-label="Primary">
-        <a class="nav-link" href="search.html">Search</a>
         <a class="nav-link active" href="index.html" aria-current="page">Map</a>
+        <a class="nav-link" href="search.html">Favorites</a>
         <a class="nav-link" href="about.html">About</a>
       </nav>
+    </div>
+
+    <div class="detail-card panel map-header" id="dialog">
+      <div
+        class="location-header"
+        style="
+          display: grid;
+          grid-template-columns: 5fr auto;
+          align-content: center;
+          align-items: center;
+        "
+      >
+        <h2 id="title">Marineterrein</h2>
+        <button onclick="closeDialog()">🅧</button>
+      </div>
+      <!-- <p style="margin-top: 0.25em">Amsterdam · 🇳🇱 Nederland</p>
+      <p>Status: Goed</p>
+      <div style="margin-top: 2em">
+        <button>🗺️ Route plannen</button>
+        <button>🛈 Meer informatie</button>
+      </div> -->
     </div>
 
     <div id="map" aria-label="Map of bathing water locations"></div>

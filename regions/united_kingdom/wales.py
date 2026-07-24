@@ -7,7 +7,7 @@ class Wales(Region):
     url = "https://environment.data.gov.uk/wales/bathing-waters/doc/bathing-water?_pageSize=1000&_view=bathing-water&_properties=latestProfile.countyName.name%2Cdistrict.alias%2ClatestSampleAssessment.followingSuspension.endOfSuspension%2ClatestSampleAssessment.sampleDateTime.ordinalYear%2ClatestComplianceAssessment.sampleYear.ordinalYear%2ClatestComplianceAssessment.assessmentQualifier%2ClatestComplianceAssessment.assessmentRegime&_lang=en%2Ccy%2Cnone"
 
     def __init__(self):
-        Region.__init__(self, 'gb-cym', 'United Kingdom', 'Wales')
+        Region.__init__(self, 'uk', 'United Kingdom', 'Wales')
     
     def ingest(self):
         data = self.loadJSON(self.url)
@@ -20,5 +20,5 @@ class Wales(Region):
         })
         df["name"] = [item[1]['_value'] for item in df['name']]
         df['country'] = self.iso_code
-        df = df[["id", "name", "lat", "lon"]]
+        df = df[["id", "name", "country", "lat", "lon"]]
         return df

@@ -1,10 +1,13 @@
-from requests import get, Request
-import geopandas as gpd
-from pathlib import Path
-from json import dump
-from numpy import nan
-from geojson import Feature, Point, FeatureCollection, dump as geodump
 import logging
+from json import dump
+from pathlib import Path
+
+import geopandas as gpd
+from geojson import Feature, FeatureCollection, Point
+from geojson import dump as geodump
+from numpy import nan
+from requests import Request, get
+
 
 class Region():
     def __init__(self, iso_code, country, region=None):
@@ -51,7 +54,8 @@ class Region():
                     # id=item['id'],
                     geometry=Point((item['lon'], item['lat'])),
                     properties={
-                        "name": item['name']
+                        "name": item['name'],
+                        "country": item['country']
                     }
                 )
                 collection.append(feature)

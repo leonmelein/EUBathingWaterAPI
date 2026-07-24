@@ -22,5 +22,5 @@ class NorthernIreland(Region):
         df['name'].str.title()
         df['country'] = self.iso_code
         return df[[
-            'id', 'name', 'lon', 'lat'
+            'id', 'name', 'country', 'lon', 'lat'
         ]]

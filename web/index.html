@@ -35,25 +35,12 @@
       </nav>
     </div>
 
-    <div class="detail-card panel map-header" id="dialog">
-      <div
-        class="location-header"
-        style="
-          display: grid;
-          grid-template-columns: 5fr auto;
-          align-content: center;
-          align-items: center;
-        "
-      >
-        <h2 id="title">Marineterrein</h2>
-        <button onclick="closeDialog()">🅧</button>
+    <div class="detail-card panel map-header" id="dialog" popover="auto">
+      <div class="location-header">
+        <h2 id="title"></h2>
+        <button id="closeDialog">🅧</button>
       </div>
-      <!-- <p style="margin-top: 0.25em">Amsterdam · 🇳🇱 Nederland</p>
-      <p>Status: Goed</p>
-      <div style="margin-top: 2em">
-        <button>🗺️ Route plannen</button>
-        <button>🛈 Meer informatie</button>
-      </div> -->
+      <p id="country"></p>
     </div>
 
     <div id="map" aria-label="Map of bathing water locations"></div>

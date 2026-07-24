@@ -405,16 +405,25 @@ select:focus {
 }
 
 .detail-card {
-  z-index: 5000;
-  right: 0;
+  position: fixed;
+  left: auto;
+  right: 12px;
   top: 5em;
-  max-width: 24em;
+  width: min(24em, calc(100vw - 24px));
   max-height: 18em;
+  margin: 0;
+  z-index: 5000;
   padding: 1em;
   background: rgba(255, 255, 255, 0.7);
   filter: drop-shadow(1em 1em 5em rgba(255, 255, 255, 0.2));
   backdrop-filter: blur(0.2em);
-  display: none;
+
+  .location-header {
+    display: grid;
+    grid-template-columns: 5fr auto;
+    align-content: center;
+    align-items: center;
+  }
 
   button {
     background-color: lightgray;

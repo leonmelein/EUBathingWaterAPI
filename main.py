@@ -1,13 +1,15 @@
-from tqdm import tqdm
-from datetime import datetime
-from pandas import concat
-import colorama
 import logging
 import time
+from datetime import datetime
+
+import colorama
+from geojson import Feature, FeatureCollection, Point, dump
 from numpy import nan
-from geojson import Feature, Point, FeatureCollection, dump
+from pandas import concat
+from tqdm import tqdm
 
 from regions import *
+
 
 class Ingester():
     def __init__(self, regionProviders, generateEU=False,):
@@ -83,9 +85,9 @@ if __name__ == "__main__":
         Belgium(),
         Luxembourg(),
         Germany(),
-        # France(),
+        # # France(),
         Spain(),
-        # Portugal(),
+        # # Portugal(),
         UnitedKingdom(),
         Ireland(),
         Austria(),

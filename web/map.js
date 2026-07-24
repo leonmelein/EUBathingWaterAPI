@@ -2,15 +2,10 @@ const map = L.map("map", {
     zoomControl: true,
     preferCanvas: true
 }).setView([54, 15], 6);
+const dialog = document.getElementById('dialog');
+const dialogClose = document.getElementById('closeDialog');
 const attributionControl = map.attributionControl;
 let loadStatusAttribution = "Loading GeoJSON...";
-
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
-setLoadStatus(loadStatusAttribution)
-map.locate({ setView: true, maxZoom: 4 });
 
 const countriesByIso = {
     al: "Albania",
@@ -78,35 +73,27 @@ const countryColorsByIso = {
     uk: "#012169"
 };
 
-
-function onLocationFound(e) {
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+setLoadStatus(loadStatusAttribution)
+map.locate({ setView: true, maxZoom: 4 });
+map.on('locationfound', (e) => {
     var radius = e.accuracy;
     L.circleMarker(e.latlng).addTo(map)
     L.circle(e.latlng, radius).addTo(map);
-}
+});
+dialogClose.addEventListener('click', (e) => {
+    dialog.hidePopover();
+});
 
-map.on('locationfound', onLocationFound);
+function isoCodeToFlagEmoji(isoCode) {
+    const flagIsoCode = { uk: "gb" }[isoCode] ?? isoCode;
 
-async function loadCountryGeoJson(isoCode) {
-    const path = `../data/${isoCode}/locations.geojson`;
-    const response = await fetch(path);
-    if (!response.ok) {
-        throw new Error(`${response.status} ${response.statusText}`);
-    }
-    const geojson = await response.json();
-    return { isoCode, path, geojson };
-}
-
-function popupHtml(feature) {
-    const props = feature?.properties ?? {};
-    const name = props.name ?? "Unnamed location";
-    const extra = Object.entries(props)
-        .filter(([key]) => key !== "name")
-        .slice(0, 6)
-        .map(([key, value]) => `<div><strong>${key}</strong>: ${String(value)}</div>`)
-        .join("");
-
-    return `<div><strong>${name}</strong>${extra ? `<hr>${extra}` : ""}</div>`;
+    return flagIsoCode
+        .toUpperCase()
+        .replace(/./g, (char) => String.fromCodePoint(127397 + char.charCodeAt()));
 }
 
 function tooltipHtml(feature) {
@@ -129,14 +116,14 @@ function setLoadStatus(message) {
     }
 }
 
-function closeDialog() {
-    var dialog = document.getElementById('dialog');
-    dialog.style.display = 'none';
-}
-
-function openDialog() {
-    var dialog = document.getElementById('dialog');
-    dialog.style.display = 'block';
+async function loadCountryGeoJson(isoCode) {
+    const path = `../data/${isoCode}/locations.geojson`;
+    const response = await fetch(path);
+    if (!response.ok) {
+        throw new Error(`${response.status} ${response.statusText}`);
+    }
+    const geojson = await response.json();
+    return { isoCode, path, geojson };
 }
 
 Promise.allSettled(Object.keys(countriesByIso).map((isoCode) => loadCountryGeoJson(isoCode)))
@@ -164,11 +151,12 @@ Promise.allSettled(Object.keys(countriesByIso).map((isoCode) => loadCountryGeoJs
                     fillOpacity: 0.75
                 }).on('click', (e) => {
                     console.log(e);
-                    openDialog();
-                    document.getElementById("title").textContent = e.target.feature.properties.name;
+                    dialog.showPopover();
+                    var properties = e.target.feature.properties;
+                    document.getElementById("title").textContent = properties.name;
+                    document.getElementById("country").textContent = `${isoCodeToFlagEmoji(properties.country)} ${countriesByIso[properties.country]}`
                 }),
                 onEachFeature: (feature, featureLayer) => {
-                    // featureLayer.bindPopup(popupHtml(feature), { maxWidth: 280 });
                     featureLayer.bindTooltip(tooltipHtml(feature));
                 }
             }).addTo(map);

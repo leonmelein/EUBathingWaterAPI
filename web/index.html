@@ -35,21 +35,30 @@
       </nav>
     </div>
 
-    <div class="detail-card panel map-header" id="dialog" popover="auto">
+    <div class="detail-card panel" id="dialog" popover="auto">
       <div class="location-header">
         <h2 id="title"></h2>
-        <button id="closeDialog">🅧</button>
+        <div id="closeDialog" class="btn">
+          <span>Ⅹ</span>
+        </div>
       </div>
       <p id="country"></p>
+      <div class="actions">
+        <div class="btn action-btn favorite">
+          <span class="icon">♥️</span>
+          <p>Add to Favorites</p>
+        </div>
+      </div>
     </div>
 
     <div id="map" aria-label="Map of bathing water locations"></div>
-
+    <!-- 
     <script
       src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
-    ></script>
-    <script src="map.js"></script>
+    ></script> -->
+    <!-- <script src="map.js"></script> -->
+    <script type="module" src="dist/map.js"></script>
   </body>
 </html>

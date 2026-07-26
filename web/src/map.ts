@@ -1,46 +1,18 @@
-const map = L.map("map", {
+import { Circle, CircleMarker, Control, FeatureGroup, GeoJSON, Layer, Map, TileLayer } from "https://unpkg.com/leaflet/dist/leaflet-src.esm.js";
+import { addToLocalStorageArray, countriesByIso } from "./index.js";
+
+
+const map = new Map("map", {
     zoomControl: true,
     preferCanvas: true
 }).setView([54, 15], 6);
+
 const dialog = document.getElementById('dialog');
 const dialogClose = document.getElementById('closeDialog');
 const attributionControl = map.attributionControl;
 let loadStatusAttribution = "Loading GeoJSON...";
 
-const countriesByIso = {
-    al: "Albania",
-    at: "Austria",
-    be: "Belgium",
-    bg: "Bulgaria",
-    cy: "Cyprus",
-    cz: "Czechia",
-    de: "Germany",
-    dk: "Denmark",
-    ee: "Estonia",
-    es: "Spain",
-    fr: "France",
-    fi: "Finland",
-    gr: "Greece",
-    hr: "Croatia",
-    hu: "Hungary",
-    ie: "Ireland",
-    it: "Italy",
-    lt: "Lithuania",
-    lu: "Luxembourg",
-    lv: "Latvia",
-    mt: "Malta",
-    nl: "Netherlands",
-    pl: "Poland",
-    pt: "Portugal",
-    ro: "Romania",
-    se: "Sweden",
-    si: "Slovenia",
-    sk: "Slovakia",
-    ch: "Switzerland",
-    uk: "United Kingdom"
-};
-
-const countryColorsByIso = {
+const countryColorsByIso: Record<string, string> = {
     al: "#da291c",
     at: "#ed2939",
     be: "#b31b34",
@@ -73,43 +45,41 @@ const countryColorsByIso = {
     uk: "#012169"
 };
 
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+new TileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
+
 setLoadStatus(loadStatusAttribution)
 map.locate({ setView: true, maxZoom: 4 });
+
 map.on('locationfound', (e) => {
     var radius = e.accuracy;
-    L.circleMarker(e.latlng).addTo(map)
-    L.circle(e.latlng, radius).addTo(map);
-});
-dialogClose.addEventListener('click', (e) => {
-    dialog.hidePopover();
+    new CircleMarker(e.latlng, {}).addTo(map)
+    new Circle(e.latlng, radius).addTo(map);
 });
 
-function isoCodeToFlagEmoji(isoCode) {
+dialogClose!.addEventListener('click', () => {
+    dialog!.hidePopover();
+});
+
+function isoCodeToFlagEmoji(isoCode: string) {
     const code = isoCode.substring(0, 2)
     const flagIsoCode = { uk: "gb" }[code] ?? code;
 
     return flagIsoCode
         .toUpperCase()
-        .replace(/./g, (char) => String.fromCodePoint(127397 + char.charCodeAt()));
+        .replace(/./g, (char) => String.fromCodePoint(127397 + char.charCodeAt(0)));
 }
 
-function tooltipHtml(feature) {
+function tooltipHtml(feature: any) {
     const props = feature?.properties ?? {};
     const name = props.name ?? "Unnamed location";
-    const extra = Object.entries(props)
-        .filter(([key]) => key !== "name")
-        .slice(0, 6)
-        .map(([key, value]) => `<div><strong>${key}</strong>: ${String(value)}</div>`)
-        .join("");
 
     return `<strong>${name}</strong>`;
 }
 
-function setLoadStatus(message) {
+function setLoadStatus(message: string) {
     if (screen.width > 768) {
         attributionControl.removeAttribution(loadStatusAttribution);
         loadStatusAttribution = message;
@@ -117,7 +87,7 @@ function setLoadStatus(message) {
     }
 }
 
-async function loadCountryGeoJson(isoCode) {
+async function loadCountryGeoJson(isoCode: string) {
     const path = `../data/${isoCode}/locations.geojson`;
     const response = await fetch(path);
     if (!response.ok) {
@@ -129,8 +99,8 @@ async function loadCountryGeoJson(isoCode) {
 
 Promise.allSettled(Object.keys(countriesByIso).map((isoCode) => loadCountryGeoJson(isoCode)))
     .then((results) => {
-        const overlays = {};
-        const allLayers = [];
+        const overlays: Record<string, Layer> = {};
+        const allLayers: Layer[] | undefined = [];
         let loadedLayers = 0;
         let failedLayers = 0;
         let totalCount = 0;
@@ -143,19 +113,21 @@ Promise.allSettled(Object.keys(countriesByIso).map((isoCode) => loadCountryGeoJs
 
             const { isoCode, geojson } = result.value;
             const color = countryColorsByIso[isoCode] ?? "#0f766e";
-            const layer = L.geoJSON(geojson, {
-                pointToLayer: (_, latlng) => L.circleMarker(latlng, {
+            const layer = new GeoJSON(geojson, {
+                pointToLayer: (_, latlng) => new CircleMarker(latlng, {
                     radius: 6,
                     weight: 1,
                     color,
                     fillColor: color,
                     fillOpacity: 0.75
                 }).on('click', (e) => {
-                    console.log(e);
-                    dialog.showPopover();
+                    dialog!.showPopover();
                     var properties = e.target.feature.properties;
-                    document.getElementById("title").textContent = properties.name;
-                    document.getElementById("country").textContent = `${isoCodeToFlagEmoji(properties.country)} ${countriesByIso[properties.country]}`
+                    document.getElementById("title")!.textContent = properties.name;
+                    document.getElementById("country")!.textContent = `${isoCodeToFlagEmoji(properties.country)} ${countriesByIso[properties.country]}`
+                    dialog!.getElementsByClassName('favorite')[0].addEventListener('click', () => {
+                        addToLocalStorageArray('favorites', `${properties.country}\\${properties.id}`)
+                    });
                 }),
                 onEachFeature: (feature, featureLayer) => {
                     featureLayer.bindTooltip(tooltipHtml(feature));
@@ -170,16 +142,15 @@ Promise.allSettled(Object.keys(countriesByIso).map((isoCode) => loadCountryGeoJs
         });
 
         if (allLayers.length > 0) {
-            const group = L.featureGroup(allLayers);
+            const group = new FeatureGroup(allLayers);
             const bounds = group.getBounds();
-            const em = parseFloat(getComputedStyle(document.documentElement).fontSize);
+            // const em = parseFloat(getComputedStyle(document.documentElement).fontSize);
 
             map.fitBounds(bounds.pad(0.05), {
                 paddingTopLeft: [0, 20]   // 1em top padding
             });
 
-
-            var layerControl = L.control.layers(null, overlays, { collapsed: true }).addTo(map);
+            var layerControl = new Control.Layers(undefined, overlays, { collapsed: true }).addTo(map);
             map.removeControl(layerControl);
         }
 

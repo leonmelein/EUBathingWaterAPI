@@ -8,3 +8,5 @@ env/
 data/
 *.log
 *.env
+web/dist/
+web/node_modules/

@@ -36,7 +36,16 @@
         <a class="nav-link" href="about.html" aria-current="page">About</a>
       </nav>
     </div>
-    <div id="content"></div>
+    <div id="content">
+      <h1 class="cta">Favorites</h1>
+      <div class="content"></div>
+    </div>
+
+    <template id="favorite">
+      <h2><slot id="title" name="title">Placeholder title</slot></h2>
+      <p><slot id="country" name="country">🇳🇱 Example country</slot></p>
+    </template>
+
     <div class="footer">
       <div>
         <a
@@ -127,18 +136,13 @@
         </ul>
       </div>
     </div>
-
-    <script
-      type="module"
-      crossorigin
-      src="/web/search/index-Cd6ZXavp.js"
-    ></script>
-    <link rel="stylesheet" crossorigin href="/web/search/index-BYMtjprZ.css" />
     <!-- <script
       src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
     <script src="map.js"></script> -->
+    <!-- <script src="search.js"></script> -->
+    <script type="module" src="dist/favorites.js"></script>
   </body>
 </html>

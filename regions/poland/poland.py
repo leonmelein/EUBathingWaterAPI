@@ -18,8 +18,8 @@ class Poland(Region):
     def ingest(self):
         if self.cookies:
             headers = {
-                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
-                    "Cookie": ""
+                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+                    "Cookie": self.cookies
             }
             website = requests.get(self.url, headers=headers)
             soup = BeautifulSoup(website.text, "html.parser")

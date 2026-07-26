@@ -3,7 +3,7 @@ import { countriesByIso } from "./index.js";
 // Load favorites
 async function fetchData(item: string) {
     try {
-        const response = await fetch(`/data/${item.split("/")[0]}/locations/${item.split("/")[1]}.json`);
+        const response = await fetch(`/data/${item.split("\\")[0]}/locations/${item.split("\\")[1]}.json`);
         const data = await response.json();
         console.log(data);
         return data;

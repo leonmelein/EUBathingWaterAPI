@@ -19,6 +19,7 @@ class NorthernIreland(Region):
             "attributes.centroidX": "lon",
             "attributes.centroidY": "lat"
         })
+        df.fillna({'id': "UKGBNIPA_" + df['name'].apply(lambda x: x.replace("'", "").replace(" ", "").upper())}, inplace=True)
         df['name'].str.title()
         df['country'] = self.iso_code
         return df[[

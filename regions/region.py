@@ -55,6 +55,7 @@ class Region():
                     geometry=Point((item['lon'], item['lat'])),
                     properties={
                         "name": item['name'],
+                        "id": item['id'],
                         "country": item['country']
                     }
                 )

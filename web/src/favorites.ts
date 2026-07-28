@@ -1,9 +1,9 @@
-import { countriesByIso } from "./index.js";
+import { countriesByIso, isoCodeToFlagEmoji } from "./country.ts";
 
 // Load favorites
 async function fetchData(item: string) {
     try {
-        const response = await fetch(`/data/${item.split("\\")[0]}/locations/${item.split("\\")[1]}.json`);
+        const response = await fetch(`/data/${item.split('/')[0]}/locations/${item.split('/')[1]}.json`);
         const data = await response.json();
         console.log(data);
         return data;
@@ -32,9 +32,9 @@ Promise.all(items.map(async (item: string) => {
         const countrySlot = fragment.getElementById("country") as HTMLSlotElement;
 
         titleSlot.textContent = data.name;
-        countrySlot.textContent = countriesByIso[data.country];
+        countrySlot.textContent = `${isoCodeToFlagEmoji(data.country)} ${countriesByIso[data.country]}`;
 
-        document.querySelector(".content")!.appendChild(fragment);
+        document.querySelector(".favorites")!.appendChild(fragment);
     }
 }));
 // console.log(results);

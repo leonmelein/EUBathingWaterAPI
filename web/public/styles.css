@@ -135,7 +135,10 @@ select:focus {
 .nav-link {
   color: var(--text);
   text-decoration: none;
-  padding: 8px 12px;
+  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid rgba(16, 32, 24, 0.08);
@@ -336,14 +339,24 @@ select:focus {
   .links {
     list-style-type: none;
     padding: 0;
+    text-decoration: none;
 
     li {
       margin: 0.5em 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5em;
 
       svg {
         height: 1em;
         width: 1em;
         vertical-align: middle;
+      }
+
+      a {
+        text-decoration: none;
+        color: var(--text);
       }
     }
   }
@@ -409,8 +422,8 @@ select:focus {
 .detail-card {
   position: fixed;
   left: auto;
-  right: 12px;
-  top: 5em;
+  right: 1em;
+  top: 6em;
   width: min(24em, calc(100vw - 24px));
   max-height: 18em;
   margin: 0;
@@ -487,6 +500,30 @@ select:focus {
       }
     }
   }
+}
+
+.favorites {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+
+  .favorite {
+    background-color: lightgray;
+    border-radius: 2em;
+    padding: 2em;
+
+    & > * {
+      margin: 0;
+    }
+  }
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
 }
 
 @media screen and (max-width: 420px) {

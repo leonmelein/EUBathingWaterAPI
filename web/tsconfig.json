@@ -1,60 +1,24 @@
 {
   "compilerOptions": {
-    // --- Type Checking ---
+    "target": "es2023",
+    "module": "esnext",
+    "lib": ["ES2023", "DOM"],
+    "types": ["vite/client"],
+    "allowArbitraryExtensions": true,
+    "skipLibCheck": true,
 
-    // Enables all strict type-checking flags. Default in TS 6.0.
-    // Includes strictNullChecks, noImplicitAny, strictFunctionTypes, etc.
-    // If you're tempted to turn this off: don't.
-    "strict": true,
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
 
-    // Verifies that side-effect-only imports (import "./setup.js") actually resolve.
-    // Without this, a typo in a side-effect import silently does nothing.
-    "noUncheckedSideEffectImports": true,
-
-    // Catch unused locals and parameters.
-    // Annoying during prototyping, valuable in production code.
+    /* Linting */
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-
-    // Force functions with code paths that don't all return a value to error.
-    "noImplicitReturns": true,
-
-    // --- Module System ---
-    "target": "ES2022",
-    "module": "esnext",
-    "moduleResolution": "bundler",
-
-    // Compiled JS goes here. Add dist/ to .gitignore.
-    "outDir": "./dist",
-
-    // Your source root. Preserves directory structure in outDir.
-    "rootDir": "./src",
-
-    // Generate .d.ts files alongside JS output.
-    // Essential if you're building a library. Harmless for applications.
-    "declaration": true,
-
-    // Source maps for debugging. Your stack traces will point to .ts files
-    // instead of compiled .js, which makes production debugging bearable.
-    "sourceMap": true,
-
-    // --- Interop ---
-
-    // Allows default imports from modules with no default export.
-    // Mostly needed for compatibility with CommonJS packages.
-    "esModuleInterop": true,
-
-    // Resolve JSON files as modules. Useful for config files.
-    "resolveJsonModule": true,
-
-    // Ensure import casing matches the filesystem.
-    // Saves you from "works on Mac, breaks on Linux" issues.
-    "forceConsistentCasingInFileNames": true
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true
   },
-
-  // What to compile
-  "include": ["src/**/*"],
-
-  // What to ignore
-  "exclude": ["node_modules", "dist", "tests"]
+  "include": ["src"]
 }

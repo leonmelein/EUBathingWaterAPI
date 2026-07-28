@@ -1,44 +1,11 @@
-import { Circle, CircleMarker, Control, FeatureGroup, GeoJSON, Layer, Map, TileLayer } from "https://unpkg.com/leaflet/dist/leaflet-src.esm.js";
-import { addToLocalStorageArray, countriesByIso } from "./index.js";
+import { Circle, CircleMarker, Control, FeatureGroup, GeoJSON, Layer, Map, TileLayer } from 'leaflet';
+import { addToLocalStorageArray, countriesByIso, countryColorsByIso, isInLocalStorageArray, isoCodeToFlagEmoji } from './country';
 
 const dialog = document.getElementById('dialog');
 const dialogClose = document.getElementById('closeDialog');
 dialogClose!.addEventListener('click', () => {
     dialog!.hidePopover();
 });
-
-const countryColorsByIso: Record<string, string> = {
-    al: "#da291c",
-    at: "#ed2939",
-    be: "#b31b34",
-    bg: "#00966e",
-    cy: "#d57800",
-    cz: "#11457e",
-    de: "#000000",
-    dk: "#c60c30",
-    ee: "#4891d9",
-    es: "#aa151b",
-    fr: "#0055a4",
-    fi: "#003580",
-    gr: "#0d5eaf",
-    hr: "#cf1020",
-    hu: "#436f4d",
-    ie: "#169b62",
-    it: "#009246",
-    lt: "#fdb913",
-    lu: "#00a3e0",
-    lv: "#9e3039",
-    mt: "#cf142b",
-    nl: "#b85c00",
-    pl: "#dc143c",
-    pt: "#046a38",
-    ro: "#002b7f",
-    se: "#006aa7",
-    si: "#005da4",
-    sk: "#0b4ea2",
-    ch: "#d52b1e",
-    uk: "#012169"
-};
 
 function mapSetup(){
     let loadStatusAttribution = "Loading GeoJSON...";
@@ -92,9 +59,20 @@ function mapSetup(){
                         var properties = e.target.feature.properties;
                         document.getElementById("title")!.textContent = properties.name;
                         document.getElementById("country")!.textContent = `${isoCodeToFlagEmoji(properties.country)} ${countriesByIso[properties.country]}`
-                        dialog!.getElementsByClassName('favorite')[0].addEventListener('click', () => {
-                            addToLocalStorageArray('favorites', `'${properties.country}\\${properties.id}'`)
-                        });
+
+                        const favoriteButton = dialog!.getElementsByClassName('favorite')[0] as HTMLElement;
+                        const favoriteId = `${properties.country}/${properties.id}`;
+
+                        if (isInLocalStorageArray('favorites', favoriteId)) {
+                            favoriteButton.innerHTML = `<span class="icon">✅</span><p>Added to favorites`;
+                        } else {
+                            favoriteButton.innerHTML = `<span class="icon">♥️</span><p>Add to favorites`;
+                        }
+
+                        favoriteButton.onclick = () => {
+                            addToLocalStorageArray('favorites', `${properties.country}/${properties.id}`)
+                            favoriteButton.innerHTML = `<span class="icon">✅</span><p>Added to favorites`
+                        };
                     }),
                     onEachFeature: (feature, featureLayer) => {
                         featureLayer.bindTooltip(tooltipHtml(feature));
@@ -111,7 +89,6 @@ function mapSetup(){
         if (allLayers.length > 0) {
             const group = new FeatureGroup(allLayers);
             const bounds = group.getBounds();
-            // const em = parseFloat(getComputedStyle(document.documentElement).fontSize);
 
             map.fitBounds(bounds.pad(0.05), {
                 paddingTopLeft: [0, 20]   // 1em top padding
@@ -139,15 +116,6 @@ function mapSetup(){
                 attributionControl.addAttribution(loadStatusAttribution);
             }
     });
-}
-
-function isoCodeToFlagEmoji(isoCode: string) {
-    const code = isoCode.substring(0, 2)
-    const flagIsoCode = { uk: "gb" }[code] ?? code;
-
-    return flagIsoCode
-        .toUpperCase()
-        .replace(/./g, (char) => String.fromCodePoint(127397 + char.charCodeAt(0)));
 }
 
 function tooltipHtml(feature: any) {

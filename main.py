@@ -1,3 +1,4 @@
+import json
 import logging
 import time
 from datetime import datetime
@@ -33,14 +34,19 @@ class Ingester():
         self._preStep()
 
         dataset = []
+        country_index = []
         progressBar = tqdm(self.regions, desc="Region", unit='region', colour='green')
         for region in progressBar:
             progressBar.set_description(region.description(), refresh=True)
             data = region.ingest()
+            country_index.append(self._countryIndexEntry(region, data))
 
             # If generating EU wide list, add to dataset
             if self.generateEU:
                 dataset.append(data)
+
+        with open("data/countries.json", "w", encoding="utf-8") as f:
+            json.dump(country_index, f, ensure_ascii=False, indent=2)
 
         # EU wide list of locations
         if self.generateEU:
@@ -65,6 +71,32 @@ class Ingester():
                 dump(data, f, ensure_ascii=False)
                     
         self._postStep()
+
+    def _countryIndexEntry(self, region, data):
+        valid_locations = data[data["lat"].notna() & data["lon"].notna()]
+
+        entry = {
+            "iso": region.iso_code,
+            "name": region.country,
+            "count": int(valid_locations.shape[0]),
+            "geojson": f"data/{region.iso_code}/locations.geojson",
+        }
+
+        if valid_locations.empty:
+            entry["bounds"] = None
+            return entry
+
+        entry["bounds"] = [
+            [
+                float(valid_locations["lat"].min()),
+                float(valid_locations["lon"].min()),
+            ],
+            [
+                float(valid_locations["lat"].max()),
+                float(valid_locations["lon"].max()),
+            ],
+        ]
+        return entry
 
     def _preStep(self):
         self.time = time.process_time()

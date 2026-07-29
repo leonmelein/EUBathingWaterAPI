@@ -189,6 +189,43 @@ select:focus {
   outline: none;
 }
 
+.country-count-marker {
+  width: auto !important;
+  height: auto !important;
+  transform: translate(-50%, -50%);
+}
+
+.country-count-marker span {
+  display: block;
+  min-width: 3.25em;
+  padding: 0.45em 0.65em;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(16, 32, 24, 0.18);
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.location-marker {
+  width: 12px !important;
+  height: 12px !important;
+  transform: translate(-50%, -50%);
+}
+
+.location-marker span {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--marker-color, #0f766e);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--marker-color, #0f766e), transparent 25%);
+}
+
 .status-error {
   color: #b91c1c;
   font-weight: 600;

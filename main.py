@@ -111,6 +111,6 @@ if __name__ == "__main__":
         Cyprus(),
         Malta()
     ]
-    regions = [Portugal()]
+    # regions = [Portugal()]
     loader = Ingester(regions, generateEU=True)
     loader.ingest()

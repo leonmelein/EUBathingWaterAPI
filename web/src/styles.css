@@ -348,7 +348,7 @@ select:focus {
       align-items: center;
       gap: 0.5em;
 
-      svg {
+      img {
         height: 1em;
         width: 1em;
         vertical-align: middle;

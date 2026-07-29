@@ -1,4 +1,4 @@
-import { Circle, CircleMarker, Control, FeatureGroup, GeoJSON, Layer, Map, TileLayer } from 'leaflet';
+import { Circle, CircleMarker, FeatureGroup, GeoJSON, Layer, Map, TileLayer } from 'leaflet';
 import { addToLocalStorageArray, countriesByIso, countryColorsByIso, isInLocalStorageArray, isoCodeToFlagEmoji } from './country';
 
 const dialog = document.getElementById('dialog');
@@ -48,34 +48,45 @@ function mapSetup(){
                 const { isoCode, geojson } = result.value;
                 const color = countryColorsByIso[isoCode] ?? "#0f766e";
                 const layer = new GeoJSON(geojson, {
-                    pointToLayer: (_, latlng) => new CircleMarker(latlng, {
-                        radius: 6,
-                        weight: 1,
-                        color,
-                        fillColor: color,
-                        fillOpacity: 0.75
-                    }).on('click', (e) => {
-                        dialog!.showPopover();
-                        var properties = e.target.feature.properties;
-                        document.getElementById("title")!.textContent = properties.name;
-                        document.getElementById("country")!.textContent = `${isoCodeToFlagEmoji(properties.country)} ${countriesByIso[properties.country]}`
+                    pointToLayer: (feature, latlng) => {
+                        const marker = new CircleMarker(latlng, {
+                            radius: 6,
+                            weight: 1,
+                            color,
+                            fillColor: color,
+                            fillOpacity: 0.75
+                        });
 
-                        const favoriteButton = dialog!.getElementsByClassName('favorite')[0] as HTMLElement;
-                        const favoriteId = `${properties.country}/${properties.id}`;
+                        marker.on('mouseover', () => {
+                            if (!marker.getTooltip()) {
+                                marker.bindTooltip(tooltipHtml(feature));
+                            }
 
-                        if (isInLocalStorageArray('favorites', favoriteId)) {
-                            favoriteButton.innerHTML = `<span class="icon">✅</span><p>Added to favorites`;
-                        } else {
-                            favoriteButton.innerHTML = `<span class="icon">♥️</span><p>Add to favorites`;
-                        }
+                            marker.openTooltip();
+                        });
 
-                        favoriteButton.onclick = () => {
-                            addToLocalStorageArray('favorites', `${properties.country}/${properties.id}`)
-                            favoriteButton.innerHTML = `<span class="icon">✅</span><p>Added to favorites`
-                        };
-                    }),
-                    onEachFeature: (feature, featureLayer) => {
-                        featureLayer.bindTooltip(tooltipHtml(feature));
+                        marker.on('click', (e) => {
+                            dialog!.showPopover();
+                            var properties = e.target.feature.properties;
+                            document.getElementById("title")!.textContent = properties.name;
+                            document.getElementById("country")!.textContent = `${isoCodeToFlagEmoji(properties.country)} ${countriesByIso[properties.country]}`
+
+                            const favoriteButton = dialog!.getElementsByClassName('favorite')[0] as HTMLElement;
+                            const favoriteId = `${properties.country}/${properties.id}`;
+
+                            if (isInLocalStorageArray('favorites', favoriteId)) {
+                                favoriteButton.innerHTML = `<span class="icon">✅</span><p>Added to favorites`;
+                            } else {
+                                favoriteButton.innerHTML = `<span class="icon">♥️</span><p>Add to favorites`;
+                            }
+
+                            favoriteButton.onclick = () => {
+                                addToLocalStorageArray('favorites', `${properties.country}/${properties.id}`)
+                                favoriteButton.innerHTML = `<span class="icon">✅</span><p>Added to favorites`
+                            };
+                        });
+
+                        return marker;
                     }
                 }).addTo(map);
 
@@ -93,9 +104,6 @@ function mapSetup(){
             map.fitBounds(bounds.pad(0.05), {
                 paddingTopLeft: [0, 20]   // 1em top padding
             });
-
-            var layerControl = new Control.Layers(undefined, overlays, { collapsed: true }).addTo(map);
-            map.removeControl(layerControl);
         }
 
         if (loadedLayers === 0) {

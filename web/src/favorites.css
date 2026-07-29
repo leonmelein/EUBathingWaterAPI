@@ -1,0 +1,8 @@
+/* web/src/favorites.css */
+@import "./styles.css";
+
+@media screen and (max-width: 768px) {
+  .favorites {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

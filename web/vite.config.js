@@ -1,4 +1,4 @@
-import { dirname, resolve } from 'node:path'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -7,6 +7,7 @@ export default defineConfig({
             input: {
                 main: resolve(import.meta.dirname, 'index.html'),
                 favorites: resolve(import.meta.dirname, 'favorites.html'),
+                about: resolve(import.meta.dirname, 'about.html')
             },
         },
     },
